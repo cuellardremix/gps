@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+ 
+ <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">gpsadmin</property>
+        <property name="hibernate.connection.password">gpsgps</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/gpsdb</property>
+<!-- 		<property name="hibernate.connection.url">jdbc:postgresql://192.168.0.103:5432/gpsdb</property> -->
+ 
+<!--     <property name="connection.url">jdbc:mysql://localhost:3306/mydb</property> -->
+<!--     <property name="connection.username">root</property> -->
+<!--     <property name="connection.password">1234</property> -->
+<!--     <property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
+<!--     <property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
+ 
+<!--     <property name="show_sql">true</property> -->
+ 
+    <property name="format_sql">true</property>
+    <property name="hbm2ddl.auto">update</property>
+ 	<property name="query.substitutions">true 1,false 0,yes 'Y',no 'N', getdate=getdate</property>
+ 
+    <!-- JDBC connection pool (use the built-in) -->
+    <property name="connection.pool_size">1</property>
+    <property name="current_session_context_class">thread</property>
+
+     <mapping class="com.cj.pojos.GPSData" />
+	 <mapping class="com.cj.pojos.Menu" />
+	 <mapping class="com.cj.pojos.Perfil" />
+	 <mapping class="com.cj.pojos.Usuario" />
+	 <mapping class="com.cj.pojos.Vehiculo" />
+	 <mapping class="com.cj.pojos.Comando"/>
+	 <mapping class="com.cj.pojos.Cerca"/>
+     <mapping class="com.cj.pojos.Ruta"/>
+     <mapping class="com.cj.pojos.Cliente"/>
+     <mapping class="com.cj.pojos.Plaza"/>
+     <mapping class="com.cj.pojos.Turno"/>
+     <mapping class="com.cj.pojos.ControlRuta"/>
+     <mapping class="com.cj.pojos.Configuracion"/>
+
+ <!-- <mapping resource="com/mkyong/user/DBUser.hbm.xml"></mapping> -->
+</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="styleRa.css"  />
+        trayecto sobre GeoCerca GPS
+    </ui:define>
+    
+    <ui:define name="content">
+  
+  <h:panelGrid columns="2">
+
+
+  <h:form id="panelA">
+    <h:panelGrid class="infoA" columns="2">
+      <h:outputLabel value="Ultima Velocidad registrada:"></h:outputLabel>
+      <h:outputLabel value="#{trayecto.gpsData.speed}"></h:outputLabel>
+      <h:outputLabel value="Ultima Mensaje recibido:"></h:outputLabel>
+      <h:outputLabel value="#{trayecto.gpsData.alarm}"></h:outputLabel>
+    </h:panelGrid>
+    <h:panelGrid columns="2">
+    <h:selectOneMenu id="comandosA" value="#{trayecto.comandoSeleccionado}" style="width:150px">
+		<f:selectItems value="#{trayecto.comandos}" />
+	</h:selectOneMenu>
+    <h:commandButton action="#{trayecto.activarComando}" value="Ejecutar Comando"></h:commandButton>
+    </h:panelGrid>
+    
+<h:selectOneMenu id="vehiculosA" value="#{trayecto.vehiculoSeleccionado}" style="width:150px">
+		<f:selectItems value="#{trayecto.vehiculos}"/>
+</h:selectOneMenu>
+<h:commandButton action="#{trayecto.cambiarVehiculo}" value="Enviar"></h:commandButton>
+
+
+<h:selectOneMenu id="cercasA" value="#{trayecto.cercaSeleccionada}" style="width:150px">
+		<f:selectItems value="#{trayecto.cercas}"/>
+</h:selectOneMenu>
+<h:commandButton action="#{trayecto.pintarCerca}" value="Enviar"></h:commandButton>
+
+  </h:form>
+        <h:form id="gmap">        
+            <m:map id="mapa" width="500" height="400" enableScrollWheelZoom="true" 
+            binding="#{trayecto.map}"
+            renderOnWindowLoad ="false"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true">
+            </m:map>
+        </h:form>        
+  </h:panelGrid>
+<!--                   <span></span><img src="resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/> -->
+    </ui:define>
+</ui:composition>
+</html>

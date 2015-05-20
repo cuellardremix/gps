@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+    <h:outputStylesheet library="css" name="table-style.css"  />
+        Rastreador GPS
+    </ui:define>
+<ui:define name="content">
+<f:view>
+
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Administraci&oacute;n de Cercas</span></h1>	
+	  </div><!--close menubar-->
+      <div id="header">  
+
+ <h:form id="panelA">
+  		<p:growl id="messages" />
+  		
+    <h:panelGrid class="infoA" columns="6">
+
+
+    </h:panelGrid>
+    <h:panelGrid id="pA" columns="6">
+        <h:form>
+    	<h:panelGrid columns="4">
+<!--     	<h:outputLabel class="explicativo" for="txtId" value="Id:"/> -->
+<!-- 		 <h:inputText id="txtId" label="Id"  value="#{adminCerca.buscar.geoLla}" /> -->
+		 
+		 <h:outputLabel class="explicativo" for="txtNombre" value="Nombre:"/>
+		 <h:inputText id="txtNombre" label="Nombre"  value="#{adminCerca.buscar.geoNom}" />
+		 
+<!-- 		 <h:outputLabel class="explicativo" for="txtAncho" value="Ancho de GeoCerca:"/> -->
+<!-- 		 <h:inputText id="txtAncho" label="Ancho"  value="#{adminCerca.buscar.radio}" /> -->
+		 
+		 <h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		 <h:inputText id="txtDes" label="Descripcion"  value="#{adminCerca.buscar.geoDes}" />
+		 		 
+		 <h:commandButton id="btnBuscar"  value="Buscar" rendered="#{adminCerca.usuario != null}" action="#{adminCerca.buscarC}" update="growl"/>			 	 
+    	</h:panelGrid>
+    </h:form>
+
+ </h:panelGrid>
+  </h:form>
+
+      </div><!--close header-->	
+	  <div id="banner_image">
+      <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son las cercas que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminCerca.agregarCerca}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+
+	  </div><!--close banner_image-->		  
+      <div id="content">
+      <p:panel id="edit" header="Datos de la Cerca"  style="margin-bottom:20px">
+ <p:dataTable id="cercas" value="#{adminCerca.cercasDisponibles}" var="v">
+    	<p:column>
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.geoLla}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Nombre</f:facet>
+    		<h:outputText value="#{v.geoNom}"/>
+    	</p:column>
+<!--     	<p:column> -->
+<!--     		<f:facet name="header">Ancho</f:facet> -->
+<!--     		<h:outputText value="#{v.radio}"/> -->
+<!--     	</p:column> -->
+    	
+    	<p:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.geoFAl}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.geoFBa}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Ruta Asignada</f:facet>
+    		<h:outputText value="#{v.geoRut.rutNom}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Vehiculos Asignados</f:facet>
+    		
+    		 <h:dataTable
+            value="#{v.vehiculos}"
+            var="vs">
+            <h:column>"#{vs.vehMar} #{vs.vehMod}"</h:column>
+        </h:dataTable>
+    		
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminCerca.editCerca(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminCerca.deleteCerca(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</p:column>
+    </p:dataTable>
+	
+	    <h:form>
+    	<br/>
+    	<h:outputText escape="false" styleClass="explicativo" value="Indicaciones: Llena la informacion solicitada y despues da  click (minimo en 3 puntos) para señalar la zona valida de transito para el"/>
+    	<br/>
+    	<h:outputText styleClass="explicativo" value="vehiculo en el mapa.(Si el vehiculo saliera del area de rastreo, se mostrara una alaerta en la ventana de rastreo y en reportes.)" align="center"></h:outputText>
+		<br/>	<br/>
+    </h:form>
+	
+	    <h:form id="gmap">
+    <h:panelGrid columns="2">
+    	<h:panelGrid columns="2">
+    	<h:outputLabel class="explicativo" for="txtId" value="Id:"/>
+		 <h:outputText id="txtId" label="Id"  value="#{adminCerca.cercaEdit.geoLla}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtNombre" value="Nombre:"/>
+		 <h:inputText id="txtNombre" label="Nombre"  value="#{adminCerca.cercaEdit.geoNom}" />
+		 
+<!-- 		 <h:outputLabel class="explicativo" for="txtAncho" value="Ancho:"/> -->
+<!-- 		 <h:inputText id="txtAncho" label="Ancho"  value="#{adminCerca.cercaEdit.radio}" /> -->
+		 
+		 	<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		 <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminCerca.cercaEdit.geoFAl}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		 <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminCerca.cercaEdit.geoFBa}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		 <h:inputText id="txtDes" label="Descripcion"  value="#{adminCerca.cercaEdit.geoDes}" />
+		 
+		<h:outputLabel class="explicativo" for="rutas" value="Seleccione Vehiculos que seran Asignados:"/>
+		 <h:selectManyMenu id="rutas" value="#{adminCerca.vehiculosSeleccion}" style="height:200px;">
+		 	<f:selectItems value="#{adminCerca.vehiculosDisponibles}" />
+		 </h:selectManyMenu>
+    	</h:panelGrid>
+    	
+            
+            <m:map id="mapa" width="500" height="400" enableScrollWheelZoom="true" 
+            binding="#{adminCerca.map}"
+            renderOnWindowLoad ="false"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true">
+            </m:map>
+        <h:commandButton action="#{adminCerca.guardaCercaEditado}" value="Guardar"></h:commandButton>
+        </h:panelGrid>
+        </h:form>
+        </p:panel>
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">
+
+	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

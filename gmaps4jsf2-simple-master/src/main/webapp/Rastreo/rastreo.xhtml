@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+        Rastreador GPS
+    </ui:define>
+<ui:define name="content">
+<f:view>
+<h:form id="poll">
+<p:poll interval="15" listener="#{interfaz.refresh}"   process="@this"
+              widgetVar="poll" autoStart="true" async="true" update=":gmap:mapa,:mostrar"/>
+</h:form>
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Monitoreo en Tiempo Real</span></h1>	
+<!-- 	  <ul class="lavaLampWithImage" id="lava_menu"> -->
+<!-- <c:forEach var="menu" items="#{login.menus}"> -->
+
+<!-- 					<li><a href="#{request.contextPath}/#{menu.pagina}.xhtml">#{menu.nombre}</a></li> -->
+<!-- 					</c:forEach> -->
+<!-- 					</ul> -->
+	  </div><!--close menubar-->
+      <div id="header">  
+
+ <h:form id="panelA">
+  		<p:growl id="messages" />
+  		
+    <h:panelGrid class="infoA" columns="6">
+
+<!--     <h:outputText class="explicativo" value="Vehiculos en ruta: "/><h:outputText class="explicativo" value="#{interfaz.vehiculosActivos}"/> -->
+
+<!--     <h:outputLabel class="explicativo" for="fechaIni" value="Mostrar Rastreo desde:"/> -->
+<!-- 		<p:calendar id="fechaIni" label="Hora y fecha de inicio de Rastreo"   value="#{interfaz.fechaA}" pattern="MM/dd/yyyy HH:mm:ss"/> -->
+<!-- 		<h:commandButton action="#{interfaz.resetA}" value="Restablecer Fecha"></h:commandButton> -->
+
+<!-- 		<h:outputLabel class="explicativo" for="rutasA" value="Rutas Disponibles:"/> -->
+<!-- 		<h:selectOneMenu id="rutasA" value="#{interfaz.rutaSeleccionada}" style="width:150px"> -->
+<!-- 		<f:selectItems value="#{interfaz.rutas}"/> -->
+<!-- 		</h:selectOneMenu> -->
+		
+<!-- 		<h:commandButton action="#{interfaz.pintarRuta}" value="Asignar Ruta"></h:commandButton> -->
+<!-- 		<h:commandButton action="#{interfaz.iniciarRuta}" value="Iniciar Ruta"></h:commandButton> -->
+		
+		
+		
+		
+		
+      
+<!--       <p:outputLabel for="button" value="Fecha:" /> -->
+<!--         <p:calendar id="button" value="#{interfaz.fechaA}" showOn="button" /> -->
+<!-- <h:selectOneMenu id="cercasA" value="#{interfaz.cercaSeleccionada}" style="width:150px"> -->
+<!-- 		<f:selectItems value="#{interfaz.cercas}"/> -->
+<!-- </h:selectOneMenu> -->
+<!-- <h:commandButton action="#{trayecto.pintarCerca}" value="Enviar"></h:commandButton> -->
+
+    </h:panelGrid>
+    <h:panelGrid id="pA" columns="6">
+    
+    <h:outputLabel class="explicativo" for="vehiculosA" value="Selecciona el vehiculo a rastrear:"/>
+<h:selectManyListbox id="vehiculosA" value="#{interfaz.vehiculoSeleccionado}" style="width:150px">
+		<f:selectItems value="#{interfaz.vehiculos}"/>
+</h:selectManyListbox>
+<p:commandButton action="#{interfaz.cambiarVehiculoEx}" value="Enviar"></p:commandButton>
+    
+    <h:outputLabel class="explicativo" for="comandosA" value="Orden de Apagado o Encendido:"/>
+    <h:selectOneMenu id="comandosA" value="#{interfaz.comandoSeleccionado}" style="width:150px">
+		<f:selectItems value="#{interfaz.comandos}" />
+	</h:selectOneMenu>
+    <p:commandButton value="Ejecutar Comando" update="messages" onclick="PF('dlg2').show();">
+	
+	</p:commandButton>
+
+<h:outputLabel class="explicativo" for="cercasA" value="Cercas Disponibles:"/>
+		<h:selectOneMenu id="cercasA" value="#{interfaz.cercaSeleccionada}" style="width:150px">
+		<f:selectItems value="#{interfaz.cercas}"/>
+		</h:selectOneMenu>
+		<p:commandButton id="cerc" action="#{interfaz.visualizarCerca}" value="Mostrar Cerca"></p:commandButton>
+		<p:commandButton id="cerca" action="#{interfaz.desaparecerCerca}" value="Desaparecer Cerca"></p:commandButton>
+
+<p:dialog header="Comprobación, ingrese su Usuario y Constraseña" widgetVar="dlg2" minHeight="40">
+<h:selectOneMenu id="vehiculosC" value="#{interfaz.vehiculoComando}"  style="width:150px">
+		<f:selectItems value="#{interfaz.vehiculos}"/>
+</h:selectOneMenu>
+<p:inputText value="#{interfaz.usuarioA}" label="Usuario" autocomplete="off"></p:inputText>
+<p:password value="#{interfaz.contraA}" label="Contraseña" autocomplete="off"></p:password>
+<p:commandButton action="#{interfaz.activarComando}" onclick="PF('dlg2').hide();" value="Ejecutar Comando" update="messages">
+	<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert" />
+</p:commandButton>
+<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();"></p:commandButton>
+</p:dialog>
+ </h:panelGrid>
+  </h:form>
+<h:form>
+
+</h:form>
+      </div><!--close header-->	
+	  <div id="banner_image">
+		<script type="text/javascript">
+
+				function changeMapZoom(event) {
+// 					map1.setZoom(2);
+					var center = map1.getCenter();
+					myRemote([{name:'latitud', value:center.lat()}, {name:'longitud', value:center.lng()},
+					          {name:'zoom', value:map1.getZoom()}]);
+// 	                   document.getElementById("message").innerHTML = "Center of map is " + center.toString()+"Zoom: "+map1.getZoom();
+				}
+          </script>
+        <h:form id="gmap">
+        <br/>
+		<br/>
+        <p:remoteCommand name="myRemote" actionListener="#{interfaz.listen}"/>
+        <h:panelGrid  class="infoA" columns="4">
+<h:panelGrid columns="1" style="margin-bottom: 10px">
+    </h:panelGrid>
+	    </h:panelGrid>
+<!--             <div class="infoA" id="message"/> -->
+            <m:map id="mapa" width="960" height="400" 
+            binding="#{interfaz.map}"
+            renderOnWindowLoad ="false"
+            partiallyTriggered="true" 
+            autoReshape="false"
+            rendered="true"
+            jsVariable="map1">
+            
+<!--                   <m:eventListener eventName="click" jsFunction="addMarkerHere"/> -->
+                  <m:eventListener eventName="center_changed" jsFunction="changeMapZoom"/>
+            </m:map>
+
+        </h:form>
+	  </div><!--close banner_image-->		  
+      <div id="content">
+    <h:form id="mostrar">
+  <p:carousel value="#{interfaz.vehiculosSe}" headerText="Estado Actual" var="v"  
+  itemStyleClass="carItem" binding="#{interfaz.mostrar}" >
+<!--  	<c:forEach items="#{interfaz.vehiculosSe}" var="v"> -->
+ 	<h:panelGrid itemStyle="width:100px">
+ 	<hr style="#{v.io4}"></hr>
+ 	<f:facet id="a#{v.imei}" name="header">
+ 		<h:outputText value="#{v.io1}"  style="font-size:16px;" />
+ 	</f:facet>
+ 	<h:outputText value="Velocidad Actual: #{v.speed} (km/h)" style="font-size:12px;" />
+    <h:outputText value="Gasolina: #{v.io3}" style="font-size:12px;" />
+    <h:outputText value="Estatus: #{v.alarm eq 'acc on' ? 'Encendido':v.speed!=0.0?'Encendido':'Apagado'}" style="font-size:12px;" />
+    <h:outputText value="Fecha y Hora: #{v.fecha}" style="font-size:12px;" />
+    <h:outputText escape="false" value="Dirección Fisica: #{v.io2}" style="width:333px;font-size:12px;word-break: break-all;" />
+    </h:panelGrid>
+
+<!--  	</c:forEach> -->
+  </p:carousel>
+</h:form>
+	
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">
+    <p:panel id="toggleable" header="Definición de Simbolos" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+	   <h:panelGrid columns="2">
+  <h:outputText value="Ultimo lugar"></h:outputText>
+<h:graphicImage value="../resources/imagenes/bluePoint.gif"/>
+<h:outputText value="Exceso de Velocidad"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/MarkerRed.png"/>
+<h:outputText value="Solicitud de Ayuda"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/sos.png"/>
+<h:outputText value="Vehiculo deshabilitado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/detenido.png"/>
+<h:outputText value="Vehiculo habilitado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/continuar.png"/>
+<h:outputText value="Alarma de puerta Abierta"></h:outputText>
+<h:graphicImage value="../resources/imagenes/doorAlarm.png"/>
+
+<h:outputText value="Vehiculo encendido"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/turnOn.png"/>
+<h:outputText value="Vehiculo Apagado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/turnOff.png"/>
+
+<h:outputText value="Fuera de Cerca"></h:outputText>
+<h:graphicImage value="../resources/imagenes/fueraCerca.png"/>
+</h:panelGrid>
+	   </p:panel>
+
+	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

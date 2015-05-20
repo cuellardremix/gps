@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Administracion de Plazas
+    </ui:define>
+    
+    <ui:define name="content">
+    <div id="banner">
+    <h:form>
+    <h:panelGrid columns="4">
+
+    
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/> -->
+<!-- 		<p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminPlaza.buscar.plaFAl}" /> -->
+
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/> -->
+<!-- 		<p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminPlaza.buscar.plaFBa}" /> -->
+
+
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo"  value="#{adminPlaza.buscar.plaTip}"/>
+		
+		<h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		<h:inputText id="txtDes" label="Descripción"  value="#{adminPlaza.buscar.plaDes}"/>
+		
+		<h:outputLabel class="explicativo" for="txtDir" value="Dirección:"/>
+		<h:inputText id="txtDir" label="Dirección"  value="#{adminPlaza.buscar.plaDir}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCol" value="Colonia:"/>
+		<h:inputText id="txtCol" label="Colonia"  value="#{adminPlaza.buscar.plaCol}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCop" value="Codigo Postal:"/>
+		<h:inputText id="txtCop" label="Codigo Postal"  value="#{adminPlaza.buscar.plaCop}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCiu" value="Ciudad:"/>
+		<h:inputText id="txtCiu" label="Ciudad"  value="#{adminPlaza.buscar.plaCiu}"/>
+		
+		<h:outputLabel class="explicativo" for="txtEst" value="Estado:"/>
+		<h:inputText id="txtEst" label="Estado"  value="#{adminPlaza.buscar.plaEst}"/>
+		
+		<h:outputLabel class="explicativo" for="txtNoc" value="Nombre del Cuidador:"/>
+		<h:inputText id="txtNoc" label="Cuidador"  value="#{adminPlaza.buscar.plaNoC}"/>
+		
+		<h:outputLabel class="explicativo" for="txtC1" value="Telefono 1:"/>
+		<h:inputText id="txtC1" label="Tipo"  value="#{adminPlaza.buscar.platC1}"/>
+		
+		<h:outputLabel class="explicativo" for="txtC2" value="Telefono 2:"/>
+		<h:inputText id="txtC2" label="Tipo"  value="#{adminPlaza.buscar.platC2}"/>
+		
+<h:commandButton id="btnBuscar"  value="Buscar" action="#{adminPlaza.buscarP}" update="growl"/>
+    </h:panelGrid>
+    </h:form>
+    </div>
+     <h:form>
+    <h:commandButton id="repo"  value="Reporte" action="#{adminPlaza.generaReporte}" />
+    </h:form>
+    <div>
+    <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los Plazas que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminPlaza.agregarPlaza}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <h:dataTable id="plazas" value="#{adminPlaza.plazasDisponibles}" var="v"
+    styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    	<h:column>
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.plaLla}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.plaFAl}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.plaFBa}"/>
+    	</h:column>
+		<h:column>
+    		<f:facet name="header">Tipo</f:facet>
+    		<h:outputText value="#{v.plaTip}"/>
+    	</h:column>
+		<h:column>
+    		<f:facet name="header">Descripción</f:facet>
+    		<h:outputText value="#{v.plaDes}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Dirección</f:facet>
+    		<h:outputText value="#{v.plaDir}"/>
+    	</h:column>    	    	    	
+		<h:column>
+    		<f:facet name="header">Colonia</f:facet>
+    		<h:outputText value="#{v.plaCol}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Codigo Postal</f:facet>
+    		<h:outputText value="#{v.plaCop}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Ciudad</f:facet>
+    		<h:outputText value="#{v.plaCiu}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Estado</f:facet>
+    		<h:outputText value="#{v.plaEst}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Cuidador</f:facet>
+    		<h:outputText value="#{v.plaNoC}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Telefono 1</f:facet>
+    		<h:outputText value="#{v.platC1}"/>
+    	</h:column>    	    	
+		<h:column>
+    		<f:facet name="header">Telefono 2</f:facet>
+    		<h:outputText value="#{v.platC2}"/>
+    	</h:column>    	    	
+    	<h:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminPlaza.editPlaza(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminPlaza.deletePlaza(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</h:column>
+    </h:dataTable>
+    </div>
+<!--     <span></span><img src="../resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/> -->
+    </ui:define>
+                </ui:composition>
+                </html>

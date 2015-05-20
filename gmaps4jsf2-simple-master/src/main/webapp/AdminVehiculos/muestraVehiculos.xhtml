@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+    <h:outputStylesheet library="css" name="table-style.css"  />
+        Rastreador GPS
+    </ui:define>
+<ui:define name="content">
+<f:view>
+
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Administraci&oacute;n de Vehiculos</span></h1>	
+	  </div><!--close menubar-->
+      <div id="header">  
+      </div><!--close header-->	
+	  <div id="banner_image">
+   <h:form>
+    	<h:panelGrid columns="4">
+
+		<h:outputLabel class="explicativo" for="txtModelo" value="Modelo:"/>
+		<h:inputText id="txtModelo" label="Modelo"   value="#{adminVehiculos.buscar.vehMod}"/>
+
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/> -->
+<!-- 		<p:calendar id="txtFechaAlta" label="Fecha de Alta"   value="#{adminVehiculos.buscar.vehFAl}" /> -->
+
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/> -->
+<!-- 		<p:calendar id="txtFechaBaja" label="Fecha de Baja"   value="#{adminVehiculos.buscar.vehFBa}" /> -->
+
+		<h:outputLabel class="explicativo" for="txtDesc" value="Descripción:"/>
+		<h:inputText id="txtDesc" label="Descripción"   value="#{adminVehiculos.buscar.vehDes}"/>
+		
+		<h:outputLabel class="explicativo" for="txtMarca" value="Marca:"/>
+		<h:inputText id="txtMarca" label="Marca"   value="#{adminVehiculos.buscar.vehMar}"/>
+		
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo"   value="#{adminVehiculos.buscar.vehTip}"/>
+
+		<h:outputLabel class="explicativo" for="txtTarC" value="Tarjeta de Circulación:"/>
+		<h:inputText id="txtTarC" label="Tarjeta de Circulación"   value="#{adminVehiculos.buscar.vehTar}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCapac" value="Capacidad de Pasajeros:"/>
+		<h:inputText id="txtCapac" label="Capacidad"   value="#{adminVehiculos.buscar.vehCap}"/>
+
+		<h:outputLabel class="explicativo" for="txtCol" value="Color:"/>
+		<h:inputText id="txtCol" label="Color"   value="#{adminVehiculos.buscar.vehCol}"/>
+
+		<h:outputLabel class="explicativo" for="txtVeh" value="Velocidad Maxima:"/>
+		<h:inputText id="txtVeh" label="Velocidad Maxima"   value="#{adminVehiculos.buscar.vehVeM}"/>
+		
+		<h:outputLabel class="explicativo" for="txtEsta" value="Estatus:"/>
+		<h:inputText id="txtEsta" label="Estatus"   value="#{adminVehiculos.buscar.vehEsD}"/>
+		
+<!-- 	<h:outputLabel class="explicativo" for="ruta" value="Ruta:"/> -->
+<!-- 		 <h:selectOneMenu id="ruta" value="#{adminVehiculos.rutaSeleccionado}" style="width:150px"> -->
+<!-- 		<f:selectItems value="#{adminVehiculos.rutasDisponibles}" /> -->
+<!-- 	</h:selectOneMenu> -->
+		
+		
+		<h:outputLabel class="explicativo" for="txtNoCel" value="Numero de Celular:"/>
+		<h:inputText id="txtNoCel" label="NoCel"   value="#{adminVehiculos.buscar.vehNoCel}"/>
+
+		<h:outputLabel class="explicativo" for="txtImei" value="IMEI:"/>
+		<h:inputText id="txtImei" label="IMEI"    value="#{adminVehiculos.buscar.vehImei}"/>
+		
+		<h:outputLabel class="explicativo" for="txtPuerto" value="Puerto de Conexión:"/>
+		<h:inputText id="txtPuerto" label="Puerto"   value="#{adminVehiculos.buscar.vehPuerto}"/>
+		
+<h:commandButton id="btnBuscar"  value="Buscar" rendered="#{adminVehiculos.usuario != null}" action="#{adminVehiculos.buscarV}" update="growl"/>
+
+
+</h:panelGrid>
+    </h:form>
+
+
+	  </div><!--close banner_image-->		  
+      <div id="content">
+      
+      <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los vehiculos que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminVehiculos.agregarVehiculo}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <p:dataTable id="vehiculos" value="#{adminVehiculos.vehiculosDisponibles}" var="v"
+    style="font-size:10px;">
+    	<p:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.vehFAl}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.vehFBa}"/>
+    	</p:column>    	
+    	<p:column>
+    		<f:facet name="header">Descripción</f:facet>
+    		<h:outputText value="#{v.vehDes}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Estatus</f:facet>
+    		<h:outputText value="#{v.vehEsD == 0 ? 'No Disponible': 'Disponible'}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Numero de Celular</f:facet>
+    		<h:outputText value="#{v.vehNoCel}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">IMEI</f:facet>
+    		<h:outputText value="#{v.vehImei}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Puerto</f:facet>
+    		<h:outputText value="#{v.vehPuerto}"/>
+    	</p:column>
+    	<p:column>
+    	<f:facet name="header">Marca</f:facet>
+    		<h:outputText value="#{v.vehMar}"/>
+    	</p:column>
+    	<p:column>
+    	<f:facet name="header">Tipo</f:facet>
+    		<h:outputText value="#{v.vehTip}"/>
+    	</p:column>
+		<p:column>
+    	<f:facet name="header">Modelo</f:facet>
+    		<h:outputText value="#{v.vehMod}"/>
+    	</p:column>
+		<p:column>
+    	<f:facet name="header">Tarjeta de Circulación</f:facet>
+    		<h:outputText value="#{v.vehTar}"/>
+    	</p:column>
+		<p:column>
+    	<f:facet name="header">Capacidad de Pasajeros</f:facet>
+    		<h:outputText value="#{v.vehCap}"/>
+    	</p:column>
+    	<p:column>
+    	<f:facet name="header">Color</f:facet>
+    		<h:outputText value="#{v.vehCol}"/>
+    	</p:column>    	
+    	<p:column>
+    	<f:facet name="header">Velocidad Maxima</f:facet>
+    		<h:outputText value="#{v.vehVeM}"/>
+    	</p:column>    	
+<!-- 		<p:column> -->
+<!--     	<f:facet name="header">Ruta Asignada:</f:facet> -->
+<!--     		<h:outputText value="#{v.vehRu.rutNom}"/> -->
+<!--     	</p:column>    -->
+    	<p:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminVehiculos.editVehiculo(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminVehiculos.deleteVehiculo(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</p:column>
+    </p:dataTable>
+
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">
+
+	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

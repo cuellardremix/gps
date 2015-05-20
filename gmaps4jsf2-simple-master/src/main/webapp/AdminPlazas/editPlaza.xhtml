@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Editar
+    </ui:define>
+    
+    <ui:define name="content">
+    
+    <div>
+<h:form>
+ <p:growl id="growl" />  
+     	<h:outputText class="explicativo" value="ID: #{adminPlaza.plazaEdit.plaLla}"></h:outputText>
+    	<h:panelGrid columns="2">
+
+    
+		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		<p:calendar id="txtFechaAlta" label="Fecha de Alta" required="true" value="#{adminPlaza.plazaEdit.plaFAl}" />
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		<p:calendar id="txtFechaBaja" label="Fecha de Baja" value="#{adminPlaza.plazaEdit.plaFBa}" />
+
+
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo" required="true" value="#{adminPlaza.plazaEdit.plaTip}"/>
+		
+		<h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		<h:inputText id="txtDes" label="Descripción" required="true" value="#{adminPlaza.plazaEdit.plaDes}"/>
+		
+		<h:outputLabel class="explicativo" for="txtDir" value="Dirección:"/>
+		<h:inputText id="txtDir" label="Dirección" required="true" value="#{adminPlaza.plazaEdit.plaDir}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCol" value="Colonia:"/>
+		<h:inputText id="txtCol" label="Colonia" required="true" value="#{adminPlaza.plazaEdit.plaCol}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCop" value="Codigo Postal:"/>
+		<h:inputText id="txtCop" label="Codigo Postal" required="true" value="#{adminPlaza.plazaEdit.plaCop}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCiu" value="Ciudad:"/>
+		<h:inputText id="txtCiu" label="Ciudad" required="true" value="#{adminPlaza.plazaEdit.plaCiu}"/>
+		
+		<h:outputLabel class="explicativo" for="txtEst" value="Estado:"/>
+		<h:inputText id="txtEst" label="Estado" required="true" value="#{adminPlaza.plazaEdit.plaEst}"/>
+		
+		<h:outputLabel class="explicativo" for="txtNoc" value="Nombre del Administrador:"/>
+		<h:inputText id="txtNoc" label="Cuidador" required="true" value="#{adminPlaza.plazaEdit.plaNoC}"/>
+		
+		<h:outputLabel class="explicativo" for="txtC1" value="Telefono 1:"/>
+		<h:inputText id="txtC1" label="Tipo" required="true" value="#{adminPlaza.plazaEdit.platC1}"/>
+		
+		<h:outputLabel class="explicativo" for="txtC2" value="Telefono 2:"/>
+		<h:inputText id="txtC2" label="Tipo"  value="#{adminPlaza.plazaEdit.platC2}"/>
+		
+<h:commandButton id="btnGuardar"  value="Guardar" action="#{adminPlaza.guardaPlazaEditado}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminPlaza.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+</h:form>
+<h:form>
+<h:commandButton id="btnRegresar"  value="Regresar" action="#{adminPlaza.regresarMuestraPlazas}" />
+</h:form>
+    </div>
+    </ui:define>
+                </ui:composition>
+                </html>

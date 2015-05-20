@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+<link rel="stylesheet" href="resources/css/styleLogin.css" type="text/css" media="all"/>
+	<ui:insert name="js"></ui:insert>
+	<title><ui:insert name="title">Rastreador</ui:insert></title>
+	
+	
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<div class="logo">
+		<span></span><img src="resources/imagenes//logo.png" />
+		</div>
+</h:head>
+<h:body id="mainBody" >
+	<h1>
+		<ui:insert name="menuBar">
+<div id="banner">
+<div class="member-login">
+			
+				<h:form class="login"  action="#" method="post" >
+	
+					<div class="formtitle">Ingresar</div>
+					<div class="input">
+						<p:inputText id="itUsuario" value="#{login.usuario}"></p:inputText>
+						<p:watermark for="itUsuario" value="Usuario" /> 
+						<span><img src="resources/imagenes/select.png"/> </span>
+					</div>
+					<div class="input">
+						<h:inputSecret id="itPass" value="#{login.contraseña}"></h:inputSecret>
+						<p:watermark for="itPass" value="Contraseña" />
+						<span><img src="resources/imagenes//close.png"/></span>
+					</div>
+					<div class="buttons">
+<!-- 						<input class="bluebutton" type="submit" value="Login" /> -->
+						<h:commandButton class="bluebutton" action="#{login.ingresar}" value="Ingreso"></h:commandButton>
+						<div class="clear"> </div>
+					</div>
+				
+				</h:form>
+				</div>
+		</div>
+
+		</ui:insert>
+	</h1>
+	<!--     <h2>A random number: #{numberGeneratorBean.randomNumber}</h2> -->
+	
+</h:body>
+</html>

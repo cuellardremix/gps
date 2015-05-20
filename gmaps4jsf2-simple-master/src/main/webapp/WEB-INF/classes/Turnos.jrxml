@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d87bcb7-994c-4065-a9c5-6d2d009acb7d">
+	<property name="ireport.zoom" value="4.715895382000004"/>
+	<property name="ireport.x" value="1927"/>
+	<property name="ireport.y" value="280"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[Select * from Turno;]]>
+	</queryString>
+	<field name="turLla" class="java.lang.Integer"/>
+	<field name="truHF1" class="java.sql.Timestamp"/>
+	<field name="turDes" class="java.lang.String"/>
+	<field name="turDom" class="java.lang.Boolean"/>
+	<field name="turFAl" class="java.sql.Timestamp"/>
+	<field name="turFBa" class="java.sql.Timestamp"/>
+	<field name="turHI1" class="java.sql.Timestamp"/>
+	<field name="turJue" class="java.lang.Boolean"/>
+	<field name="turLun" class="java.lang.Boolean"/>
+	<field name="turMar" class="java.lang.Boolean"/>
+	<field name="turMie" class="java.lang.Boolean"/>
+	<field name="turSab" class="java.lang.Boolean"/>
+	<field name="turVie" class="java.lang.Boolean"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="725" y="0" width="77" height="102" uuid="0c1efd32-9fc1-4b9d-990e-f94a85511f62"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="a824aa52-a799-4076-8a31-3d0816a8ec31"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="46cdf97c-d326-439e-be78-519f48b97d62"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="SansSerif" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="96a4e6c0-7600-4012-9df3-7f39a50d8517"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Turnos]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="70" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="baa5f48b-9f72-4639-a579-fde4724887dc"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5dcb6c39-5c19-456a-9d27-08ab7f4f26ec"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="61" height="20" uuid="97f65bf1-8322-4412-a0f8-9b7fea68608a"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LLave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="0" width="61" height="20" uuid="bea3418d-646b-4919-87ef-983a60f5b65e"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="0" width="61" height="20" uuid="b4832d1a-5ff3-4a5a-a769-8a6523304c18"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="0" width="61" height="20" uuid="ba511ee8-0e98-4b98-8d1e-e6cd1b7817e5"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Domingo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="0" width="61" height="20" uuid="1e29b250-13b7-4c98-8b79-5d557a31396d"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Alta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="0" width="61" height="20" uuid="6c175d65-a25f-4e3d-b915-1d40080011f4"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Baja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="61" height="20" uuid="391950ef-9009-4a19-a3cf-350d248317eb"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora de Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="61" height="20" uuid="664918cd-0cb7-4adc-8822-7c982241a74f"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Jueves]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="0" width="61" height="20" uuid="67f66129-5ef5-444f-bf79-88105386c9c7"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Lunes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="549" y="0" width="61" height="20" uuid="dc191276-d541-414c-abe3-4eadf80715ea"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Martes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="0" width="61" height="20" uuid="043b6629-7c4f-48e7-aa38-76b39c606955"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Miercoles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="0" width="61" height="20" uuid="fdeae35d-160a-4ad8-a83d-2bb0973b6e31"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Sabado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="0" width="61" height="20" uuid="7760bc48-72ae-4922-86f9-bea5b772345f"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno Viernes]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="20" uuid="acbf602e-f95c-422f-ad0a-2e71ca0c98e9"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="61" height="20" uuid="b625ed46-ea0f-4bdd-80bc-f670941258d1"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turLla}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="61" y="0" width="61" height="20" uuid="b844de0a-c3e3-456d-bb2d-5f00a9ad56c3"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{truHF1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="122" y="0" width="61" height="20" uuid="fe507ab2-6f9f-4af7-868c-9c871299af2c"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turDes}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="183" y="0" width="61" height="20" uuid="4d6af258-88a8-40b7-94cd-d42c28968e11"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turDom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="244" y="0" width="61" height="20" uuid="d9b3933f-fe3d-44c5-98e7-a83ae9226ec4"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turFAl}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="305" y="0" width="61" height="20" uuid="adcf778d-a0ca-4783-9209-d04578464c71"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turFBa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="366" y="0" width="61" height="20" uuid="641d8871-4090-444e-a3a5-e6dcc1d77c7a"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turHI1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="427" y="0" width="61" height="20" uuid="26722a4c-0436-44df-b119-a5c7e187964b"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turJue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="488" y="0" width="61" height="20" uuid="fe5e91f7-1af2-45b3-a237-f2b1905af6bf"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turLun}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="549" y="0" width="61" height="20" uuid="1cd7e331-1183-4274-bb86-5b567687fff7"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turMar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="610" y="0" width="61" height="20" uuid="66ba8949-91b1-4690-b5d0-0e4642460d99"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turMie}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="671" y="0" width="61" height="20" uuid="d85428b6-22ae-4bb7-b118-45f7c60ad591"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turSab}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="732" y="0" width="61" height="20" uuid="33a5dcd2-af1f-46a2-acab-0b537acb63de"/>
+					<box>
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{turVie}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1300a766-fc47-4cd2-8867-27a59bbf2a0f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000" uuid="4cf44cce-1e96-456b-b75e-f6775bf9b14b"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="41b05fb0-7933-403d-9144-5000c8a43f6b"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="395eaec2-4115-4fec-8d1a-c938efb87e94"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="6d126bf8-0bd8-4eaf-b189-955e17caa7b0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

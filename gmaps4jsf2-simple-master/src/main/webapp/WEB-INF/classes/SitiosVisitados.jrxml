@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ActXVehiculo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d47c28d8-305b-4bb5-b14c-a0a0a0a66bbf">
+	<property name="ireport.zoom" value="1.128947860107555"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[Select idRegistro,alarm,fecha,imei,latitude,longitude,speed from GPSData  where imei='359710045828192' limit 10;]]>
+	</queryString>
+	<field name="idregistro" class="java.lang.Integer"/>
+	<field name="alarm" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="imei" class="java.lang.String"/>
+	<field name="latitude" class="java.lang.Double"/>
+	<field name="longitude" class="java.lang.Double"/>
+	<field name="speed" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="725" y="0" width="77" height="102" uuid="69539d23-bad2-4b91-8d82-3c4582d90150"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="2e7751f6-523f-4afa-bfeb-3073deb48240"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="98147d08-f1a5-43e3-9989-b48359694917"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="SansSerif" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="81b09cea-9f3c-4f2b-aef9-5ec75aa10ca4"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Actividad de Vehiculo]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="70" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="02c10118-bf26-458f-927a-9870fabd6dcc"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="a279bc8c-3da8-40b0-806d-7f845ff04177"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<columnFooter>
+		<band height="43" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="41aaeb9d-e737-4544-bce5-76d83500acb0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000" uuid="225d12d2-5bbb-47c4-b947-7f89594113dd"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="fa8f4fba-4f8b-4f80-a000-fdbd3e4cda36"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="7538274d-0de1-4251-92c9-9119431c5cc6"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="c321c3ee-7494-4ba3-917a-59e4b918e1a9"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="159" splitType="Stretch">
+			<componentElement>
+				<reportElement x="7" y="12" width="795" height="131" uuid="3b42ef9e-40b0-4d3e-80a2-aa9f87cff8a3"/>
+				<mp:map xmlns:mp="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" evaluationTime="Page" imageType="jpg-baseline">
+					<mp:latitudeExpression><![CDATA[$F{latitude}]]></mp:latitudeExpression>
+					<mp:longitudeExpression><![CDATA[$F{longitude}]]></mp:longitudeExpression>
+					<mp:zoomExpression><![CDATA[12]]></mp:zoomExpression>
+					<mp:markerData>
+						<dataset resetType="None"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None" incrementType="Report"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None" incrementType="Report"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}.floatValue()]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None"/>
+						<mp:item>
+							<mp:itemProperty name="latitude"/>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+					<mp:markerData>
+						<dataset resetType="None"/>
+						<mp:item>
+							<mp:itemProperty name="latitude">
+								<valueExpression><![CDATA[$F{latitude}]]></valueExpression>
+							</mp:itemProperty>
+							<mp:itemProperty name="longitude">
+								<valueExpression><![CDATA[$F{longitude}]]></valueExpression>
+							</mp:itemProperty>
+						</mp:item>
+					</mp:markerData>
+				</mp:map>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

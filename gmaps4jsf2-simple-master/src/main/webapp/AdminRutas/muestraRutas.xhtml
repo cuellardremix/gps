@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Administracion de Rutas
+    </ui:define>
+    
+    <ui:define name="content">
+    <div id="banner">
+    <h:form>
+    	<h:panelGrid columns="4">
+    	<h:outputLabel class="explicativo" for="txtId" value="Id:"/>
+		 <h:inputText id="txtId" label="Id"  value="#{adminRuta.buscar.rutLla}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtNombre" value="Nombre:"/>
+		 <h:inputText id="txtNombre" label="Nombre"  value="#{adminRuta.buscar.rutNom}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtAncho" value="Ancho:"/>
+		 <h:inputText id="txtAncho" label="Ancho"  value="#{adminRuta.buscar.rutAnc}" />
+		 
+<!-- 		 	<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/> -->
+<!-- 		 <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminRuta.buscar.rutFAl}" /> -->
+		 
+<!-- 		 <h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/> -->
+<!-- 		 <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminRuta.buscar.rutFBa}" /> -->
+		 
+		 <h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		 <h:inputText id="txtDes" label="Descripcion"  value="#{adminRuta.buscar.rutDes}" />
+		 
+<!-- 		 <h:outputLabel class="explicativo" for="txtFechaCrea" value="Fecha de Creacion:"/> -->
+<!-- 		 <p:calendar id="txtFechaCrea" label="Fecha de Creacion"  value="#{adminRuta.buscar.rutFec}" /> -->
+
+<!-- 		 <h:outputLabel class="explicativo" for="txtFechaIni" value="Fecha de Inicio"/> -->
+<!-- 		 <p:calendar id="txtFechaIni" label="Fecha de Inicio"  value="#{adminRuta.buscar.rutFeI}" />	 -->
+		 
+<!-- 		 <h:outputLabel class="explicativo" for="txtFechaFin" value="Fecha de Fin"/> -->
+<!-- 		 <p:calendar id="txtFechaFin" label="Fecha de Fin"  value="#{adminRuta.buscar.rutFeF}" /> -->
+		 
+		 <h:commandButton id="btnBuscar"  value="Buscar" action="#{adminRuta.buscarR}" update="growl"/>			 	 
+    	</h:panelGrid>
+    </h:form>
+    </div>
+     <h:form>
+    <h:commandButton id="repo"  value="Reporte" action="#{adminRuta.generaReporte}" />
+    </h:form>
+    <div>
+    <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son las Rutas que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminRuta.agregarRuta}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <h:dataTable id="vehiculos" value="#{adminRuta.rutasDisponibles}" var="v"
+    styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    	<h:column>
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.rutLla}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Nombre</f:facet>
+    		<h:outputText value="#{v.rutNom}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Ancho</f:facet>
+    		<h:outputText value="#{v.rutAnc}"/>
+    	</h:column>
+    	
+    	<h:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.rutFAl}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.rutFBa}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Creacion</f:facet>
+    		<h:outputText value="#{v.rutFec}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Inicio</f:facet>
+    		<h:outputText value="#{v.rutFeI}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de fin</f:facet>
+    		<h:outputText value="#{v.rutFeF}"/>
+    	</h:column>
+    	    	<h:column>
+    		<f:facet name="header">Vehiculos Asignados</f:facet>
+    		<h:panelGrid>
+    		<h:outputText value="#{v.vehiculo1.vehMar} #{v.vehiculo1.vehMod}"/>
+    		<h:outputText value="#{v.vehiculo2.vehMar} #{v.vehiculo2.vehMod}"/>
+    		<h:outputText value="#{v.vehiculo3.vehMar} #{v.vehiculo3.vehMod}"/>
+    		<h:outputText value="#{v.vehiculo4.vehMar} #{v.vehiculo4.vehMod}"/>
+    		<h:outputText value="#{v.vehiculo5.vehMar} #{v.vehiculo5.vehMod}"/>
+    		</h:panelGrid>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminRuta.editRuta(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminRuta.deleteRuta(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</h:column>
+    </h:dataTable>
+    <h:panelGrid id="edit" columns="2">
+    <h:form id="gmap">
+    <h:panelGrid columns="2">
+    	<h:panelGrid columns="2">
+    	<h:outputLabel class="explicativo" for="txtId" value="Id:"/>
+		 <h:outputText id="txtId" label="Id"  value="#{adminRuta.rutaEdit.rutLla}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtNombre" value="Nombre:"/>
+		 <h:inputText id="txtNombre" label="Nombre"  value="#{adminRuta.rutaEdit.rutNom}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtAncho" value="Ancho:"/>
+		 <h:inputText id="txtAncho" label="Ancho"  value="#{adminRuta.rutaEdit.rutAnc}" />
+		 
+		 	<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		 <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminRuta.rutaEdit.rutFAl}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		 <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminRuta.rutaEdit.rutFBa}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtDes" value="Descripción:"/>
+		 <h:inputText id="txtDes" label="Descripcion"  value="#{adminRuta.rutaEdit.rutDes}" />
+		 
+		 <h:outputLabel class="explicativo" for="txtFechaCrea" value="Fecha de Creacion:"/>
+		 <p:calendar id="txtFechaCrea" label="Fecha de Creacion"  value="#{adminRuta.rutaEdit.rutFec}" />
+
+		 <h:outputLabel class="explicativo" for="txtFechaIni" value="Fecha de Inicio"/>
+		 <p:calendar id="txtFechaIni" label="Fecha de Inicio"  value="#{adminRuta.rutaEdit.rutFeI}" pattern="HH:mm"/>	
+		 
+		 <h:outputLabel class="explicativo" for="txtFechaFin" value="Fecha de Fin"/>
+		 <p:calendar id="txtFechaFin" label="Fecha de Fin"  value="#{adminRuta.rutaEdit.rutFeF}" pattern="HH:mm"/>
+		 
+		 <h:outputLabel class="explicativo" for="rutas" value="Seleccione Vehiculos que seran Asignadas:"/>
+		 <h:selectOneMenu id="rutas" value="#{adminRuta.vehiculosSeleccion}" >
+		 	<f:selectItems value="#{adminRuta.vehiculosDisponibles}" />
+		 </h:selectOneMenu>
+		 
+		 <h:selectOneMenu id="v2" value="#{adminRuta.vehiculosSeleccion2}">
+		 	<f:selectItems value="#{adminRuta.vehiculosDisponibles2}" />
+		 </h:selectOneMenu>
+		 
+		 <h:selectOneMenu id="v3" value="#{adminRuta.vehiculosSeleccion3}">
+		 	<f:selectItems value="#{adminRuta.vehiculosDisponibles3}" />
+		 </h:selectOneMenu>
+		 
+		 <h:selectOneMenu id="v4" value="#{adminRuta.vehiculosSeleccion4}" >
+		 	<f:selectItems value="#{adminRuta.vehiculosDisponibles4}" />
+		 </h:selectOneMenu>
+		 
+		 <h:selectOneMenu id="v5" value="#{adminRuta.vehiculosSeleccion5}" >
+		 	<f:selectItems value="#{adminRuta.vehiculosDisponibles5}" />
+		 </h:selectOneMenu>
+		 
+		 <h:outputLabel class="explicativo" for="geocerca" value="Seleccione GeoCerca:"/>
+		 <h:selectOneMenu id="geocerca" value="#{adminRuta.geocercaSeleccionada}">
+		 	<f:selectItems value="#{adminRuta.geocercasDisponibles}" />
+		 </h:selectOneMenu>
+		 
+		 <h:outputLabel class="explicativo" for="turno" value="Seleccione Turnos:"/>
+		 <h:selectManyMenu id="turno" value="#{adminRuta.turnosSeleccion}" style="height:100px;width:250px;">
+		 	<f:selectItems value="#{adminRuta.turnosDisponibles}" />
+		 </h:selectManyMenu>
+		 
+		 <h:outputLabel class="explicativo" for="plaza" value="Seleccione Plaza:"/>
+		 <h:selectOneMenu id="plaza" value="#{adminRuta.plazaSeleccionada}" >
+		 	<f:selectItems value="#{adminRuta.plazasDisponibles}" />
+		 </h:selectOneMenu>
+		 
+    	</h:panelGrid>
+            <m:map id="mapa" width="500" height="400" enableScrollWheelZoom="true" 
+            binding="#{adminRuta.map}"
+            renderOnWindowLoad ="false"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true">
+            </m:map>
+        <h:commandButton action="#{adminRuta.guardaRutaEditada}" value="Guardar"></h:commandButton>
+        </h:panelGrid>
+        </h:form>
+        </h:panelGrid>
+    </div>
+     
+    
+    </ui:define>
+                </ui:composition>
+                </html>

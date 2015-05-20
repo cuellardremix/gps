@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="styleRa.css"  />
+        Configuración
+    </ui:define>
+    
+    <ui:define name="content">
+<f:view>
+<h:form>
+<h:outputLabel for="delay" value="Tiempo de retraso(s)"/>
+<p:spinner id="segundos" value="#{config.segundos}"/>
+<h:commandButton action="#{config.guardarRetraso}" value="Guardar"></h:commandButton>
+</h:form>
+  </f:view>
+    </ui:define>
+    
+</ui:composition>
+</html>

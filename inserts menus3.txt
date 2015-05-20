@@ -1,0 +1,34 @@
+﻿insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(1,'Rastreo','Rastreo/rastreo',true);
+
+
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(2,'Administración de Clientes','AdminClientes/muestraClientes',true);
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(6,'Administración de Usuarios','AdminUsuarios/muestraUsuarios',true);
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(7,'Administración de Vehiculos','AdminVehiculos/muestraVehiculos',true);
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(8,'Administración de Cercas','AdminCercas/muestraCercas',true);
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(9,'Reportes por actividad','ReporteActVehiculo/reporteActividadVehiculo',true);
+insert into Menu(idMenu,nombre,pagina,estadoRegistro) values(11,'Monitoreo General','MonitoreoGeneral/monitoreoGeneral',true);
+
+
+
+insert into Perfil(perLla,perFAL,perFBa,perNom,perTip,estadoRegistro) values(1,current_date,null,'Administrador del Sistema','',true);
+insert into Perfil(perLla,perFAL,perFBa,perNom,perTip,estadoRegistro) values(7,current_date,null,'Cliente','',true);
+
+insert into Usuario(usuLla,estadoRegistro,usuNom,usuCon,perfil_perLla) values(1,true,'Admin','Admin',1);
+
+//Perfil Sistema
+
+insert into Menu_Perfil values(2,1);
+insert into Menu_Perfil values(6,1);
+insert into Menu_Perfil values(7,1);
+insert into Menu_Perfil values(8,1);
+insert into Menu_Perfil values(9,1);
+insert into Menu_Perfil values(11,1);
+
+
+
+
+//Perfil Cliente
+insert into Menu_Perfil values(11,7);
+insert into Menu_Perfil values(1,7);
+insert into Menu_Perfil values(9,7);
+insert into Menu_Perfil values(8,7);

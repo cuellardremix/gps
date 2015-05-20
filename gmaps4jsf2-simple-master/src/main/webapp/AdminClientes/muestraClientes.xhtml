@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+    <h:outputStylesheet library="css" name="table-style.css"  />
+        Rastreador GPS
+    </ui:define>
+<ui:define name="content">
+<f:view>
+
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Administraci&oacute;n de Clientes</span></h1>	
+	  </div><!--close menubar-->
+      <div id="header">  
+
+ <h:form id="panelA">
+  		<p:growl id="messages" />
+  		
+    <h:panelGrid class="infoA" columns="6">
+
+
+    </h:panelGrid>
+    <h:panelGrid id="pA" columns="6">
+
+ </h:panelGrid>
+  </h:form>
+
+      </div><!--close header-->	
+	  <div id="banner_image">
+<h:form>
+            <h:panelGrid columns="4">
+
+    
+        <h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+        <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminCliente.buscar.cliFAl}" />
+
+        <h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+        <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminCliente.buscar.clifBa}" />
+
+
+        <h:outputLabel class="explicativo" for="txtNombre" value="Nombre del Cliente:"/>
+        <h:inputText id="txtNombre" label="Nombre"  value="#{adminCliente.buscar.cliNom}"/>
+        
+        <h:outputLabel class="explicativo" for="txtDom" value="Domicilio:"/>
+        <h:inputText id="txtDom" label="Domicilio"  value="#{adminCliente.buscar.cliDom}"/>
+        
+        <h:outputLabel class="explicativo" for="txtCol" value="Colonia:"/>
+        <h:inputText id="txtCol" label="Colonia"  value="#{adminCliente.buscar.cliCol}"/>
+        
+        <h:outputLabel class="explicativo" for="txtCP" value="Codigo Postal:"/>
+        <h:inputText id="txtCP" label="Codigo Postal"  value="#{adminCliente.buscar.cliCOP}"/>
+        
+        <h:outputLabel class="explicativo" for="txtCiu" value="Ciudad:"/>
+        <h:inputText id="txtCiu" label="Ciudad"  value="#{adminCliente.buscar.cliCiu}"/>
+        
+        <h:outputLabel class="explicativo" for="txtEdo" value="Estado:"/>
+        <h:inputText id="txtEdo" label="Estado"  value="#{adminCliente.buscar.cliEdo}"/>
+        
+        <h:outputLabel class="explicativo" for="txtPai" value="Pais:"/>
+        <h:inputText id="txtPai" label="Pais"  value="#{adminCliente.buscar.cliPai}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliCo1" value="Nombre de Contacto 1:"/>
+        <h:inputText id="txtcliCo1" label="Nombre 1"  value="#{adminCliente.buscar.cliCo1}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliT11" value="Telefono 1 de Contacto 1:"/>
+        <h:inputText id="txtcliT11" label="Telefono 1"  value="#{adminCliente.buscar.cliT11}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliT21" value="Telefono 2 de Contacto 1:"/>
+        <h:inputText id="txtcliT21" label="Telefono 2"  value="#{adminCliente.buscar.cliT21}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliC11" value="Correo 1 de Contacto 1:"/>
+        <h:inputText id="txtcliC11" label="Correo 1"  value="#{adminCliente.buscar.cliC11}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliC21" value="Correo 2 de Contacto 1:"/>
+        <h:inputText id="txtcliC21" label="Correo 2"  value="#{adminCliente.buscar.cliC21}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliCo2" value="Nombre de Contacto 2:"/>
+        <h:inputText id="txtcliCo2" label="Nombre 2"  value="#{adminCliente.buscar.cliCo2}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliT12" value="Telefono 1 de Contacto 2:"/>
+        <h:inputText id="txtcliT12" label="Telefono 1"  value="#{adminCliente.buscar.cliT12}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliT22" value="Telefono 2 de Contacto 2:"/>
+        <h:inputText id="txtcliT22" label="Telefono 2"  value="#{adminCliente.buscar.cliT22}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliC12" value="Correo 1 de Contacto 2:"/>
+        <h:inputText id="txtcliC12" label="Correo 1"  value="#{adminCliente.buscar.cliC12}"/>
+        
+        <h:outputLabel class="explicativo" for="txtcliC21" value="Correo 2 de Contacto 2:"/>
+        <h:inputText id="txtcliC22" label="Correo 2"  value="#{adminCliente.buscar.cliC22}"/>
+        
+<h:commandButton id="btnBuscar"  value="Buscar" rendered="#{adminCliente.usuario != null}" action="#{adminCliente.buscarC}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminCliente.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+    </h:form>
+
+	  </div><!--close banner_image-->		  
+      <div id="content">
+<h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los Clientes que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminCliente.agregarCliente}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <p:dataTable id="clientes" value="#{adminCliente.clientesDisponibles}" var="v"
+    style="font-size:8px;">
+        <p:column>
+            <f:facet name="header">Id</f:facet>
+            <h:outputText value="#{v.cliLla}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Fecha de Alta</f:facet>
+            <h:outputText value="#{v.cliFAl}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Fecha de Baja</f:facet>
+            <h:outputText value="#{v.clifBa}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Nombre o Razon Social</f:facet>
+            <h:outputText value="#{v.cliNom}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Domicilio</f:facet>
+            <h:outputText value="#{v.cliDom}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Colonia</f:facet>
+            <h:outputText value="#{v.cliCol}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Codigo Postal</f:facet>
+            <h:outputText value="#{v.cliCOP}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Ciudad</f:facet>
+            <h:outputText value="#{v.cliCiu}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Estado</f:facet>
+            <h:outputText value="#{v.cliEdo}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Pais</f:facet>
+            <h:outputText value="#{v.cliPai}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Nombre del Contacto 1</f:facet>
+            <h:outputText value="#{v.cliCo1}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Telefono Contacto 1</f:facet>
+            <h:outputText value="#{v.cliT11}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Telefono 2 del Contacto </f:facet>
+            <h:outputText value="#{v.cliT21}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Correo 1 del Contacto 1</f:facet>
+            <h:outputText value="#{v.cliC11}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Correo 2 del Contacto 1</f:facet>
+            <h:outputText value="#{v.cliC21}"/>
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">Nombre del Contacto 2</f:facet>
+            <h:outputText value="#{v.cliCo2}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Telefono 1 del Contacto 2</f:facet>
+            <h:outputText value="#{v.cliT12}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Telefono 2 del Contacto 2</f:facet>
+            <h:outputText value="#{v.cliT22}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Correo 1 del Contacto 2</f:facet>
+            <h:outputText value="#{v.cliC12}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Correo 2 del Contacto 2</f:facet>
+            <h:outputText value="#{v.cliC22}"/>
+        </p:column>
+            <p:column>
+            <f:facet name="header">Vehiculos Asignados</f:facet>
+     <h:dataTable
+            value="#{v.vehiculos}"
+            var="vs">
+            <h:column>"#{vs.vehMar} #{vs.vehMod}"</h:column>
+        </h:dataTable>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Acción</f:facet>
+            <h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminCliente.editCliente(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminCliente.deleteCliente(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">
+
+	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

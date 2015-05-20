@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cercas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0d43d787-a355-4194-849b-71ce6a46443d">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="2278"/>
+	<property name="ireport.y" value="507"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[Select * from Cerca;]]>
+	</queryString>
+	<field name="geoLla" class="java.lang.Integer"/>
+	<field name="estadoRegistro" class="java.lang.Boolean"/>
+	<field name="geoDes" class="java.lang.String"/>
+	<field name="geoFAl" class="java.sql.Timestamp"/>
+	<field name="geoFBa" class="java.sql.Timestamp"/>
+	<field name="geoNom" class="java.lang.String"/>
+	<field name="latitude" class="java.lang.Double"/>
+	<field name="longitude" class="java.lang.Double"/>
+	<field name="radio" class="java.lang.Double"/>
+	<field name="geoPla_plaLla" class="java.lang.Integer"/>
+	<field name="geoRut_rutLla" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="725" y="0" width="77" height="102" uuid="c0448c5f-ef9f-40a3-8ced-73b5b2d9c561"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="a4360ef2-0a78-40e0-8266-32efca6fb06b"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="15a4f4b1-bb5e-4837-b7d9-74c0dc8e72cb"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="SansSerif" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="1255a397-0257-4aab-bd2f-50ce655253e2"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cercas]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="70" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="976c04d2-9856-426f-adb6-cbb5b87ad0ed"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="3dac162f-e200-4ce8-a9c1-4f6af45d27ed"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="b4eaf15c-bfed-454e-bb66-f270830243d5"/>
+				<text><![CDATA[Llave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="c5ad60db-f231-4072-bc1a-594814f48d8a"/>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="371401dc-4e3d-46f0-9de0-222f8c9ce606"/>
+				<text><![CDATA[Fecha de Alta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="a6b11efe-025f-41fd-bdfe-ac5566bcb2f5"/>
+				<text><![CDATA[Fecha de Baja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="84db13ff-3207-45f4-8122-19a873d0657c"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="20" uuid="0d6a3556-f059-4b8b-9312-467efedffdd6"/>
+				<text><![CDATA[Latitude]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="100" height="20" uuid="cb631b6d-d2d6-4162-b994-99829f18f271"/>
+				<text><![CDATA[Longitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="100" height="20" uuid="975660fb-1932-4271-9c42-f76629252526"/>
+				<text><![CDATA[Radio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="800" height="20" uuid="ed60bcd2-00ef-4ade-9bcf-370d9c277e63"/>
+				<textField>
+					<reportElement x="0" y="0" width="100" height="20" uuid="9910ab54-b68c-4ea2-9e86-11ca0a056b78"/>
+					<textFieldExpression><![CDATA[$F{geoLla}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="0" width="100" height="20" uuid="76a1f15d-3031-4305-8657-7c8c9d602d23"/>
+					<textFieldExpression><![CDATA[$F{geoDes}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="200" y="0" width="100" height="20" uuid="def65a84-bb47-4e6f-83ce-4fbb1876c197"/>
+					<textFieldExpression><![CDATA[$F{geoFAl}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="300" y="0" width="100" height="20" uuid="82ddf314-44fc-4f93-b011-2f743371e36f"/>
+					<textFieldExpression><![CDATA[$F{geoFBa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="400" y="0" width="100" height="20" uuid="9cfc428d-4bb3-4ab8-ae3e-55481a755ead"/>
+					<textFieldExpression><![CDATA[$F{geoNom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="500" y="0" width="100" height="20" uuid="a43ee862-2f68-4d14-9f65-c7ce81701740"/>
+					<textFieldExpression><![CDATA[$F{latitude}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="600" y="0" width="100" height="20" uuid="db873d7a-944e-4f8c-92df-5a9a3ff4b6c1"/>
+					<textFieldExpression><![CDATA[$F{longitude}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="700" y="0" width="100" height="20" uuid="e0bca53e-1391-44a3-a0b5-d93daf6ba478"/>
+					<textFieldExpression><![CDATA[$F{radio}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d2ccdf1a-e02b-469c-a2a5-1c56265a5bf3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000" uuid="43bb2060-1b71-47d5-8544-aea80492d759"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="93f9b9a3-c13b-4500-93b1-82c0e0dc7453"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="8bec0f2f-e847-467d-b191-2c7372c25a50"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="a9700e02-8597-482f-8c1a-d2228c388b08"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Editar
+    </ui:define>
+    
+    <ui:define name="content">
+    
+    <div>
+<h:form>
+ <p:growl id="growl" />  
+     	<h:outputText class="explicativo" value="ID: #{adminVehiculos.vehiculoEdit.vehLla}"></h:outputText>
+    	<h:panelGrid columns="2">
+
+		<h:outputLabel class="explicativo" for="txtModelo" value="Modelo:"/>
+		<h:inputText id="txtModelo" label="Modelo" required="true" value="#{adminVehiculos.vehiculoEdit.vehMod}"/>
+
+		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		<p:calendar id="txtFechaAlta" label="Fecha de Alta" required="true" value="#{adminVehiculos.vehiculoEdit.vehFAl}" />
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		<p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminVehiculos.vehiculoEdit.vehFBa}" />
+
+		<h:outputLabel class="explicativo" for="txtDesc" value="Descripción:"/>
+		<h:inputText id="txtDesc" label="Descripción" required="true" value="#{adminVehiculos.vehiculoEdit.vehDes}"/>
+		
+		<h:outputLabel class="explicativo" for="txtMarca" value="Marca:"/>
+		<h:inputText id="txtMarca" label="Marca" required="true" value="#{adminVehiculos.vehiculoEdit.vehMar}"/>
+		
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo" required="true" value="#{adminVehiculos.vehiculoEdit.vehTip}"/>
+
+		<h:outputLabel class="explicativo" for="txtTarC" value="Tarjeta de Circulación:"/>
+		<h:inputText id="txtTarC" label="Tarjeta de Circulación" required="true" value="#{adminVehiculos.vehiculoEdit.vehTar}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCapac" value="Capacidad de Pasajeros:"/>
+		<h:inputText id="txtCapac" label="Capacidad" required="true" value="#{adminVehiculos.vehiculoEdit.vehCap}"/>
+
+		<h:outputLabel class="explicativo" for="txtCol" value="Color:"/>
+		<h:inputText id="txtCol" label="Color" required="true" value="#{adminVehiculos.vehiculoEdit.vehCol}"/>
+
+		<h:outputLabel class="explicativo" for="txtVeh" value="Velocidad Maxima:"/>
+		<h:inputText id="txtVeh" label="Velocidad Maxima" required="true" value="#{adminVehiculos.vehiculoEdit.vehVeM}"/>
+		
+		<h:outputLabel class="explicativo" for="txtVeh" value="Capacidad de Tanque:"/>
+		<h:inputText id="txtTan" label="Velocidad Maxima" required="true" value="#{adminVehiculos.vehiculoEdit.vehTanGas}"/>
+		
+		<h:outputLabel class="explicativo" for="txtEsta" value="Estatus:"/>
+<!-- 		<h:inputText id="txtEsta" label="Estatus" required="true" value="#{adminVehiculos.vehiculoEdit.vehEsD}"/> -->
+		<h:selectOneMenu id="txtEsta" value="#{adminVehiculos.estatuss}" style="width:150px">
+			<f:selectItems value="#{adminVehiculos.estatus}" />
+		</h:selectOneMenu> 
+		
+<!-- 	<h:outputLabel class="explicativo" for="ruta" value="Ruta:"/> -->
+<!-- 		 <h:selectOneMenu id="ruta" value="#{adminVehiculos.rutaSeleccionado}" style="width:150px"> -->
+<!-- 		<f:selectItems value="#{adminVehiculos.rutasDisponibles}" /> -->
+<!-- 	</h:selectOneMenu> -->
+		
+		
+		<h:outputLabel class="explicativo" for="txtNoCel" value="Numero de Celular:"/>
+		<h:inputText id="txtNoCel" label="NoCel" required="true" value="#{adminVehiculos.vehiculoEdit.vehNoCel}"/>
+
+		<h:outputLabel class="explicativo" for="txtImei" value="IMEI:"/>
+		<h:inputText id="txtImei" label="IMEI"  required="true" value="#{adminVehiculos.vehiculoEdit.vehImei}"/>
+		
+		<h:outputLabel class="explicativo" for="txtPuerto" value="Puerto de Conexión:"/>
+		<h:inputText id="txtPuerto" label="Puerto" required="true" value="#{adminVehiculos.vehiculoEdit.vehPuerto}"/>
+		
+<h:commandButton id="btnGuardar"  value="Guardar" action="#{adminVehiculos.guardaVehiculoEditado}" update="growl"/>
+
+
+</h:panelGrid>
+</h:form>
+<h:form>
+<h:commandButton id="btnRegresar"  value="Regresar" action="#{adminVehiculos.regresarMuestraVehiculos}" />
+</h:form>
+    </div>
+    </ui:define>
+                </ui:composition>
+                </html>

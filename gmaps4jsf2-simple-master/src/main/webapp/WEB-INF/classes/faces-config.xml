@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	<application>
+   </application>
+    <managed-bean>
+    	<managed-bean-name>interfaz</managed-bean-name>
+    	<managed-bean-class>com.cj.Interfaz.Interfaz</managed-bean-class>
+    	<managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+	<managed-bean>
+		<managed-bean-name>login</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.Login</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cercas</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.InterfazCercas</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminVehiculos</managed-bean-name>
+		<managed-bean-class>com.cj.adminVehiculos.InterfazAdminVehiculos</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>cercaPol</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.InterfazCercaPol</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>trayecto</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.InterfazTrayectoCerca</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>monitoreoG</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.InterfazMonitoreoGeneral</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>ruta</managed-bean-name>
+		<managed-bean-class>com.cj.Interfaz.InterfazRuta</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminRuta</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminRutas</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminUsuario</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminUsuarios</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminCliente</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminClientes</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminPlaza</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminPlazas</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminPerfil</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminPerfiles</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+		<managed-bean>
+		<managed-bean-name>adminTurno</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminTurnos</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>adminCerca</managed-bean-name>
+		<managed-bean-class>com.cj.catalogosInterfaces.AdminCercas</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>actVehiculo</managed-bean-name>
+		<managed-bean-class>com.cj.InterfacesReportes.ActividadVehiculo</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>				
+</faces-config>
+
+<!-- <faces-config xmlns="http://java.sun.com/xml/ns/javaee" -->
+<!--               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" -->
+<!--               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd" -->
+<!--               version="2.0" metadata-complete="false"> -->

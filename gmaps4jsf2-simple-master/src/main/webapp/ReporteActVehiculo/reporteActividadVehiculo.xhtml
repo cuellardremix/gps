@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+	Reporte de Actividad de Vehiculos
+    </ui:define>
+<ui:define name="content">
+<f:view>
+
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Reportes</span></h1>	
+<!-- 	  <ul class="lavaLampWithImage" id="lava_menu"> -->
+<!-- <c:forEach var="menu" items="#{login.menus}"> -->
+
+<!-- 					<li><a href="#{request.contextPath}/#{menu.pagina}.xhtml">#{menu.nombre}</a></li> -->
+<!-- 					</c:forEach> -->
+<!-- 					</ul> -->
+	  </div><!--close menubar-->
+      <div id="header">  
+
+<h:form>
+        <h:panelGrid columns="2">
+        
+        <h:outputLabel class="explicativo" for="vehiculo" value="Elige el Vehiculo a Analizar:"/>
+         <h:selectOneMenu id="vehiculo" value="#{actVehiculo.vehiculoImei}" style="width:150px">
+        <f:selectItems value="#{actVehiculo.vehiculos}" />
+    	</h:selectOneMenu>
+        <h:outputText class="explicativo" for="vehiculo" value="Elige el Rango de Fechas:"/>
+        <h:panelGrid columns="2">
+<!--         <h:outputLabel class="explicativo" for="fechaIni" value="Fecha de Inicio:"/> -->
+        <p:calendar id="fechaIni" label="Fecha de Inicio"   value="#{actVehiculo.fechaIni}" pattern="MM/dd/yyyy HH:mm:ss"/>
+
+<!--         <h:outputLabel class="explicativo" for="fechaFin" value="Fecha de Fin:"/> -->
+        <p:calendar id="fechaFin" label="Fecha de Fin"   value="#{actVehiculo.fechaFin}" pattern="MM/dd/yyyy HH:mm:ss"/>
+	</h:panelGrid>
+        
+        <h:commandButton id="btnBuscar"  value="Buscar" action="#{actVehiculo.buscarMarcas}" update="growl,mapa1" style="font-size:18px;"/>
+
+		<input type="button" name="imprimir" value="Imprimir" onclick="window.print();" style="font-size:18px;"/>
+</h:panelGrid>
+    </h:form>
+
+      </div><!--close header-->	
+        <h:outputText class="explicativo" value="."/>
+	  <div id="banner_image">
+<h:form id="mapa">
+            <m:map id="mapa1" width="960" height="400" 
+            binding="#{actVehiculo.map}"
+            renderOnWindowLoad ="false"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true"
+            jsVariable="map1">
+            
+<!--                   <m:eventListener eventName="click" jsFunction="addMarkerHere"/> -->
+<!--                   <m:eventListener eventName="center_changed" jsFunction="changeMapZoom"/> -->
+            </m:map>
+            </h:form>
+	  </div><!--close banner_image-->		  
+      <div id="content">
+
+<h:form id="datosGPS">
+    <p:scrollPanel mode="native" style="width:960px;height:400px">
+    <p:chart type="bar" model="#{actVehiculo.hModel1}" style="width:960px;height:300px;" 
+    widgetVar="barChartObj" extender="ext()"/>
+        <script type="text/javascript">
+    function ext() {
+        alert("asd");
+        this.cfg.axes.yaxis.tickOptions = {
+                formatString : '%#.1f'
+            };
+    }
+    </script>
+    </p:scrollPanel>
+    <p:dataTable  value="#{actVehiculo.datos}" var="v"
+        rowStyleClass="#{v.evento eq 'bajaGasolina' ?'bajaGasolina2': 
+        v.evento eq 'llenadoGasolina' ? 'llenadoGasolina2' : v.alarm eq 'Exceso de Velocidad' ? 'excesoVel' : 'null'}" >
+        <p:column>
+            <f:facet name="header">ID</f:facet>
+            <h:outputText value="#{v.idRegistro}" style="font-size:12px;"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Fecha</f:facet>
+            <h:outputText value="#{v.fecha}" style="font-size:12px;"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Estado</f:facet>
+            <h:outputText value="#{v.alarm}" style="font-size:12px;"/>
+        </p:column>
+        <p:column>
+        <f:facet name="header">Gasolina(Lt.)</f:facet>
+            <h:outputText value="#{v.io3}" style="font-size:12px;"/>
+        </p:column>
+        <p:column>
+        <f:facet name="header">Velocidad(km/h)</f:facet>
+            <h:outputText value="#{v.speed}" style="font-size:12px;"/>
+        </p:column>        
+        <p:column style="width:500px;">
+        <f:facet name="header">Dirección</f:facet>
+            <h:outputText value="#{v.io4}" style="font-size:10px;"/>
+        </p:column>        
+<!--                 <p:column> -->
+<!--         <f:facet name="header">Litros de Gasolina</f:facet> -->
+<!--             <h:outputText value="#{v.evento}"/> -->
+<!--         </p:column> -->
+        <f:facet name="footer">
+        <h:outputText id="gas" class="explicativo" value="Gasolina consumida: #{actVehiculo.gasolina}"  rendered="#{actVehiculo.gasolina != null}"/>
+        <h:outputText id="km" class="explicativo" value="Kilometraje Recorrido: #{actVehiculo.kilometraje}"  rendered="#{actVehiculo.kilometraje != null}"/>
+        </f:facet>
+    </p:dataTable>
+    </h:form>
+	
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">  
+           <p:panel id="toggleable" header="Definición de Simbolos" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+	   <h:panelGrid columns="2">
+  <h:outputText value="Ultimo lugar"></h:outputText>
+<h:graphicImage value="../resources/imagenes/bluePoint.gif"/>
+<h:outputText value="Exceso de Velocidad"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/MarkerRed.png"/>
+<h:outputText value="Solicitud de Ayuda"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/sos.png"/>
+<h:outputText value="Vehiculo deshabilitado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/detenido.png"/>
+<h:outputText value="Vehiculo habilitado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/continuar.png"/>
+<h:outputText value="Alarma de puerta Abierta"></h:outputText>
+<h:graphicImage value="../resources/imagenes/doorAlarm.png"/>
+
+<h:outputText value="Vehiculo encendido"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/turnOn.png"/>
+<h:outputText value="Vehiculo Apagado"> </h:outputText>
+<h:graphicImage value="../resources/imagenes/turnOff.png"/>
+
+<h:outputText value="Fuera de Cerca"></h:outputText>
+<h:graphicImage value="../resources/imagenes/fueraCerca.png"/>
+</h:panelGrid>
+	   </p:panel>
+       
+        <h:form>
+    
+    </h:form>
+   	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

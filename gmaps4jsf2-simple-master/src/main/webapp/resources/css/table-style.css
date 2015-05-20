@@ -1,0 +1,58 @@
+.explicativo{
+	color:black;
+}
+/* div{ */
+/* 	font-family: Arial, Times, serif; */
+/* 	font-style: bold; */
+/* 	margin-right:auto; */
+/* 	margin-left:auto; */
+/* } */
+#banner {
+	background:url(#{resource['imagenes/bg_banner.jpg']});
+/* 	height:285px; */
+	width:100%;
+	overflow:hidden;
+	margin-top:23px;
+}
+body{
+/* 		background-image: url("#{resource['imagenes/fondo3.jpg']}") !important; */
+	font-family: 'Open Sans', sans-serif;
+	font-size: 100%;
+}
+.order-table{   
+	border-collapse:collapse;
+}
+ 
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+ 
+.order-table-odd-row{
+	text-align:center;
+/* 	color:white; */
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+ 
+.bajaGasolina2{
+	background-color:red;
+	color:white;
+}
+.llenadoGasolina2{
+	background-color:green;
+	color:white;
+}
+.order-table-even-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border-top:1px solid #BBBBBB;
+}
+.ui-icon-myDelete{
+    background-image: url("#{resource['imagenes/delete.png']}") !important;
+}
+.ui-icon-myEdit{
+    background-image: url("#{resource['imagenes/edit.png']}") !important;
+}

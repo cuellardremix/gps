@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+    <h:outputStylesheet library="css" name="table-style.css"  />
+        Rastreador GPS
+    </ui:define>
+<ui:define name="content">
+<f:view>
+
+
+<h:body>
+  <div id="main">	
+    <div id="site_content">  
+	  <div id="menubar">
+	  <h1><span>Administraci&oacute;n de Cercas</span></h1>	
+	  </div><!--close menubar-->
+      <div id="header">  
+
+ <h:form id="panelA">
+  		<p:growl id="messages" />
+  		
+    <h:panelGrid class="infoA" columns="6">
+
+
+    </h:panelGrid>
+    <h:panelGrid id="pA" columns="6">
+
+ </h:panelGrid>
+  </h:form>
+
+      </div><!--close header-->	
+	  <div id="banner_image">
+<h:form>
+            <h:panelGrid columns="4">
+
+    
+<!--        <h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/> -->
+<!--        <h:inputText id="txtModelo" label="Modelo"  value="#{adminUsuario.buscar.usuFal}"/> -->
+<!--         <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminUsuario.buscar.usuFal}" /> -->
+
+<!--        <h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/> -->
+<!--        <h:inputText id="txtFechaBaja" label="Fecha de Baja"  value="#{adminUsuario.buscar.usuFBa}"/> -->
+<!--         <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminUsuario.buscar.usuFBa}" /> -->
+
+<!--        <h:outputLabel class="explicativo" for="txtNoCel" value="Cliente:"/> -->
+<!--        <h:inputText id="txtNoCel" label="NoCel"  value="#{adminUsuario.buscar.cliente.cliLla}"/> -->
+
+        <h:outputLabel class="explicativo" for="txtNombre" value="Nombre del Usuario:"/>
+        <h:inputText id="txtNombre" label="Usuario"  value="#{adminUsuario.buscar.usuNom}"/>
+        
+<!--        <h:outputLabel class="explicativo" for="txtPass" value="Contraseña:"/> -->
+<!--        <h:inputSecret id="txtPass" label="Contraseña"  value="#{adminUsuario.buscar.usuCon}"/> -->
+        
+        <h:outputLabel class="explicativo" for="perfil" value="Perfil:"/>
+         <h:selectOneMenu id="perfil" value="#{adminUsuario.perfilSeleccionado}"  style="width:150px">
+        <f:selectItems value="#{adminUsuario.perfilesDisponibles}" />
+    </h:selectOneMenu>
+
+<!--        <h:inputText id="txtPuerto" label="Puerto"  value="#{adminUsuario.buscar.perfil.nombre}"/> -->
+        
+<h:commandButton id="btnBuscar"  value="Buscar" action="#{adminUsuario.buscarU}" rendered="#{adminUsuario.usuario != null}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminUsuario.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+    </h:form>
+	  </div><!--close banner_image-->		  
+      <div id="content">
+ <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los Usuarios que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminUsuario.agregarUsuario}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <p:dataTable id="usuarios" value="#{adminUsuario.usuariosDisponibles}" var="v"
+    styleClass="order-table"
+                headerClass="order-table-header"
+                rowClasses="order-table-odd-row,order-table-even-row">
+        <p:column>
+            <f:facet name="header">Id</f:facet>
+            <h:outputText value="#{v.usuLla}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Fecha de Alta</f:facet>
+            <h:outputText value="#{v.usuFal}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Fecha de Baja</f:facet>
+            <h:outputText value="#{v.usuFBa}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Cliente</f:facet>
+            <h:outputText value="#{v.cliente.cliLla}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Nombre del Usuario</f:facet>
+            <h:outputText value="#{v.usuNom}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Perfil</f:facet>
+            <h:outputText value="#{v.perfil.perNom}"/>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Acción</f:facet>
+            <h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminUsuario.editUsuario(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminUsuario.deleteUsuario(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+       <br style="clear:both;" />
+      </div><!--close content-->	
+    </div><!--close site_content-->	
+    <div id="footer">
+
+	</div><!--close footer-->	
+  </div><!--close main-->	
+</h:body>
+</f:view>
+</ui:define>
+</ui:composition>
+</html>

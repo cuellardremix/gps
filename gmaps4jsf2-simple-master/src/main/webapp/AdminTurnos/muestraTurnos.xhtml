@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Administracion de Turnos
+    </ui:define>
+    <ui:define name="content">
+    <div id="banner">
+    <h:form>
+        	<h:panelGrid columns="4">
+
+    
+    <h:outputLabel class="explicativo" for="txtDesc" value="Descripcion:"/>
+		 <p:inputText id="txtDesc" label="Descripcion"  value="#{adminTurno.buscar.turDes}" />
+		 
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/> -->
+<!-- 		 <p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminTurno.buscar.turFAl}" pattern="MM/dd/yyyy HH:mm:ss"/> -->
+
+<!-- 		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/> -->
+<!-- 		 <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminTurno.buscar.turFBa}" pattern="MM/dd/yyyy HH:mm:ss"/> -->
+
+<h:outputLabel class="explicativo" for="checkLun" value="Lunes:"/>
+<h:selectBooleanCheckbox id="checkLun" value="#{adminTurno.buscar.turLun}" ></h:selectBooleanCheckbox> 
+
+<h:outputLabel class="explicativo" for="checkMar" value="Martes:"/>
+<h:selectBooleanCheckbox id="checkMar" value="#{adminTurno.buscar.turMar}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkMie" value="Miercoles:"/>
+<h:selectBooleanCheckbox id="checkMie" value="#{adminTurno.buscar.turMie}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkJue" value="Jueves:"/>
+<h:selectBooleanCheckbox id="checkJue" value="#{adminTurno.buscar.turJue}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkVie" value="Viernes:"/>
+<h:selectBooleanCheckbox id="checkVie" value="#{adminTurno.buscar.turVie}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkSab" value="Sabado:"/>
+<h:selectBooleanCheckbox id="checkSab" value="#{adminTurno.buscar.turSab}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkDom" value="Domingo:"/>
+<h:selectBooleanCheckbox id="checkDom" value="#{adminTurno.buscar.turDom}" ></h:selectBooleanCheckbox>
+
+<!-- 		<h:outputLabel class="explicativo" for="txtIni" value="Hora de Inicio:"/> -->
+<!-- 		 <p:calendar id="txtIni" label="Hora de Inicio"  value="#{adminTurno.buscar.turHI1}" pattern="MM/dd/yyyy HH:mm:ss"/> -->
+
+<!-- 		<h:outputLabel class="explicativo" for="txtFin" value="Hora de Fin:"/> -->
+<!-- 		 <p:calendar id="txtFin" label="Hora de Fin"  value="#{adminTurno.buscar.truHF1}" pattern="MM/dd/yyyy HH:mm:ss"/> -->
+		 
+<h:commandButton id="btnBuscar"  value="Buscar" action="#{adminTurno.buscarU}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminTurno.regresarMuestraTurnos}" /> -->
+
+</h:panelGrid>
+    </h:form>
+    </div>
+     <h:form>
+    <h:commandButton id="repo"  value="Reporte" action="#{adminTurno.generaReporte}" />
+    </h:form>
+    
+    <div>
+    <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los Turnos que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminTurno.agregarTurno}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <h:dataTable id="turnos" value="#{adminTurno.turnosDisponibles}" var="v"
+    styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    	<h:column>
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.turLla}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Descripcion</f:facet>
+    		<h:outputText value="#{v.turDes}"/>
+    	</h:column>
+    	
+    	<h:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.turFAl}">
+    		<f:convertDateTime pattern="dd-MM-yyyy"/>
+    		</h:outputText>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.turFBa}">
+    		<f:convertDateTime pattern="dd-MM-yyyy"/>
+    		</h:outputText>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Lunes</f:facet>
+    		<h:outputText value="#{v.turLun}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Miercoles</f:facet>
+    		<h:outputText value="#{v.turMie}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Jueves</f:facet>
+    		<h:outputText value="#{v.turJue}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Viernes</f:facet>
+    		<h:outputText value="#{v.turVie}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Sabado</f:facet>
+    		<h:outputText value="#{v.turSab}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Turno Domingo</f:facet>
+    		<h:outputText value="#{v.turDom}"/>
+    	</h:column>
+    	
+    	<h:column>
+    		<f:facet name="header">Hora de Inicio</f:facet>
+    		<h:outputText value="#{v.turHI1}">
+    		<f:convertDateTime pattern="HH:mm:ss"/>
+    		</h:outputText>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Hora de Fin</f:facet>
+    		<h:outputText value="#{v.truHF1}">
+    		<f:convertDateTime pattern="HH:mm:ss"/>
+    		</h:outputText>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminTurno.editTurno(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminTurno.deleteTurno(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</h:column>
+    </h:dataTable>
+    </div>
+<!--     <span></span><img src="../resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/> -->
+    </ui:define>
+                </ui:composition>
+                </html>

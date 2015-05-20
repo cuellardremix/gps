@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="styleRa.css"  />
+        Rastreador GPS
+    </ui:define>
+    
+    <ui:define name="content">
+  
+  <h:panelGrid columns="2">
+
+
+  <h:form id="panelA">
+  <p:remoteCommand name="myRemoteC" actionListener="#{cercaPol.listen}"/>
+    <h:panelGrid class="infoA" columns="2">
+    
+<h:selectOneMenu id="cercasA" value="#{cercaPol.cercaSeleccionada}" disabled="#{cercaPol.bloqueoVehiculo}" style="width:150px">
+		<f:selectItems value="#{cercaPol.cercas}"/>
+</h:selectOneMenu>
+<h:commandButton action="#{cercaPol.pintarCerca}" value="Pintar Cerca"></h:commandButton>
+
+
+<h:outputText value="Nombre de la Nueva cerca: "></h:outputText>
+<h:inputText value="#{cercaPol.nuevaCerca}"></h:inputText>
+<h:outputText value="Ancho:"></h:outputText>
+<h:inputText value="#{cercaPol.anchoNuevo}"></h:inputText>
+<h:commandButton action="#{cercaPol.agregarNuevaCerca}" value="Crear"></h:commandButton>
+<!-- <h:commandButton action="#{cercaPol.iniciarMapa}" value="Limpiar"></h:commandButton> -->
+<h:commandButton action="#{cercaPol.iniciar}" value="Limpiar"></h:commandButton>
+</h:panelGrid>
+<!-- <h:commandButton action="#{cercaPol.clear}" value="Limpiar"></h:commandButton> -->
+  </h:form>
+            <script>
+				function addMarkerHere (event) {  	
+					try{
+					myRemoteC([{name:'latitud', value:event.latLng.lat()}, {name:'longitud', value:event.latLng.lng()}]);
+					var marker = new google.maps.Marker({  
+						position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()),
+						map: map1
+					});  
+					}catch(e){alert(e);}
+				} 			
+			</script>
+ 
+        <h:form id="gmap">        
+            <m:map id="mapa" width="500" height="400" enableScrollWheelZoom="true" 
+            binding="#{cercaPol.map}"
+            renderOnWindowLoad ="false"
+            latitude="#{cercaPol.gpsData.latitude}"
+            longitude="#{cercaPol.gpsData.longitude}"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true"
+            actionListener="#{cercaPol.manejar}"
+			jsVariable="map1">
+			
+			<m:eventListener eventName="click" jsFunction="addMarkerHere"/>
+            </m:map>
+            
+
+        </h:form>
+  </h:panelGrid>
+<!--                   <span></span><img src="../resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/> -->
+    </ui:define>
+</ui:composition>
+</html>

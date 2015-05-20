@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Administracion de Perfiles
+    </ui:define>
+    
+    <ui:define name="content">
+    <div id="banner">
+    <h:form>
+    <h:panelGrid columns="4">
+    <h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		<p:calendar id="txtFechaAlta" label="Fecha de Alta"  value="#{adminPerfil.buscar.perFAl}" />
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		<p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminPerfil.buscar.perFBa}" />
+
+
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo"  value="#{adminPerfil.buscar.perTip}"/>
+		
+		<h:outputLabel class="explicativo" for="txtNom" value="Nombre"/>
+		<h:inputText id="txtNom" label="Nombre"  value="#{adminPerfil.buscar.perNom}"/>
+		
+		
+<h:commandButton id="btnBuscar"  value="Buscar" action="#{adminPerfil.buscarP}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminPerfil.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+    </h:form>
+    </div>
+        <h:form>
+    <h:commandButton id="repo"  value="Reporte" action="#{adminPerfil.generaReporte}" />
+    </h:form>
+    <div>
+    <h:form>
+    <h:outputText styleClass="explicativo" value="Estos son los Perfiles que se encuentran registrados en el sistema." align="center"></h:outputText>
+    <h:commandButton action="#{adminPerfil.agregarPerfil}" image="../resources/imagenes/add.png" title="Agregar"></h:commandButton>
+    </h:form>
+    
+    <h:dataTable id="perfiles" value="#{adminPerfil.perfilesDisponibles}" var="v"
+    styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    	<h:column>
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.perLla}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Alta</f:facet>
+    		<h:outputText value="#{v.perFAl}"/>
+    	</h:column>
+    	<h:column>
+    		<f:facet name="header">Fecha de Baja</f:facet>
+    		<h:outputText value="#{v.perFBa}"/>
+    	</h:column>
+		<h:column>
+    		<f:facet name="header">Tipo</f:facet>
+    		<h:outputText value="#{v.perTip}"/>
+    	</h:column>
+		<h:column>
+    		<f:facet name="header">Nombre</f:facet>
+    		<h:outputText value="#{v.perNom}"/>
+    	</h:column>    	    	
+    	<h:column>
+    		<f:facet name="header">Acción</f:facet>
+    		<h:form>
+<p:growl id="messages" />
+<p:commandButton action="#{adminPerfil.editPerfil(v)}" icon="ui-icon-myEdit" title="Editar" style="width:50px;height:50px"/>
+<p:commandButton title="Eliminar" actionListener="#{adminPerfil.deletePerfil(v)}" icon="ui-icon-myDelete"  style="width:50px;height:50px" update="messages">
+<p:confirm header="Confirmación" message="¿Estas seguro?" icon="ui-icon-alert"/></p:commandButton>
+<p:confirmDialog global="true">
+<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></p:confirmDialog>
+    		</h:form>
+    	</h:column>
+    </h:dataTable>
+    </div>
+    <span></span><img src="../resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/>
+    </ui:define>
+                </ui:composition>
+                </html>

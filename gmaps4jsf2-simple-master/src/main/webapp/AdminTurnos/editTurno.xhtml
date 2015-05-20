@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Editar Turno
+    </ui:define>
+    
+    <ui:define name="content">
+    
+    <div>
+<h:form>
+ <p:growl id="growl" />  
+     	<h:outputText class="explicativo" value="ID: #{adminTurno.turnoEdit.turLla}"></h:outputText>
+    	<h:panelGrid columns="2">
+
+    <h:outputLabel class="explicativo" for="txtDesc" value="Descripcion:"/>
+		 <p:inputText id="txtDesc" label="Descripcion"  required="true" value="#{adminTurno.turnoEdit.turDes}" />
+		 
+		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		 <p:calendar id="txtFechaAlta" label="Fecha de Alta" required="true" value="#{adminTurno.turnoEdit.turFAl}" pattern="MM/dd/yyyy HH:mm:ss"/>
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		 <p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminTurno.turnoEdit.turFBa}" pattern="MM/dd/yyyy HH:mm:ss"/>
+
+<h:outputLabel class="explicativo" for="checkLun" value="Lunes:"/>
+<h:selectBooleanCheckbox id="checkLun" value="#{adminTurno.turnoEdit.turLun}" ></h:selectBooleanCheckbox> 
+
+<h:outputLabel class="explicativo" for="checkMar" value="Martes:"/>
+<h:selectBooleanCheckbox id="checkMar" value="#{adminTurno.turnoEdit.turMar}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkMie" value="Miercoles:"/>
+<h:selectBooleanCheckbox id="checkMie" value="#{adminTurno.turnoEdit.turMie}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkJue" value="Jueves:"/>
+<h:selectBooleanCheckbox id="checkJue" value="#{adminTurno.turnoEdit.turJue}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkVie" value="Viernes:"/>
+<h:selectBooleanCheckbox id="checkVie" value="#{adminTurno.turnoEdit.turVie}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkSab" value="Sabado:"/>
+<h:selectBooleanCheckbox id="checkSab" value="#{adminTurno.turnoEdit.turSab}" ></h:selectBooleanCheckbox>
+
+<h:outputLabel class="explicativo" for="checkDom" value="Domingo:"/>
+<h:selectBooleanCheckbox id="checkDom" value="#{adminTurno.turnoEdit.turDom}" ></h:selectBooleanCheckbox>
+
+		<h:outputLabel class="explicativo" for="txtIni" value="Hora de Inicio:"/>
+		 <p:calendar id="txtIni" label="Hora de Inicio" required="true" value="#{adminTurno.turnoEdit.turHI1}" pattern="HH:mm:ss"/>
+
+		<h:outputLabel class="explicativo" for="txtFin" value="Hora de Fin:"/>
+		 <p:calendar id="txtFin" label="Hora de Fin"  required="true" value="#{adminTurno.turnoEdit.truHF1}" pattern="HH:mm:ss"/>
+		 		
+<h:commandButton id="btnGuardar"  value="Guardar" action="#{adminTurno.guardaTurnoEditado}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminTurno.regresarMuestraTurnos}" /> -->
+
+</h:panelGrid>
+</h:form>
+<h:form>
+<h:commandButton id="btnRegresar"  value="Regresar" action="#{adminTurno.regresarMuestraTurnos}" />
+</h:form>
+    </div>
+    </ui:define>
+                </ui:composition>
+                </html>

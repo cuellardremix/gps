@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Editar
+    </ui:define>
+    
+    <ui:define name="content">
+    
+    <div>
+<h:form>
+ <p:growl id="growl" />  
+     	<h:outputText class="explicativo" value="ID: #{adminCliente.clienteEdit.cliLla}"></h:outputText>
+    	<h:panelGrid columns="2">
+
+    
+		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		<p:calendar id="txtFechaAlta" label="Fecha de Alta" required="true" value="#{adminCliente.clienteEdit.cliFAl}" />
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		<p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminCliente.clienteEdit.clifBa}" />
+
+
+		<h:outputLabel class="explicativo" for="txtNombre" value="Nombre del Cliente:"/>
+		<h:inputText id="txtNombre" label="Nombre" required="true" value="#{adminCliente.clienteEdit.cliNom}"/>
+		
+		<h:outputLabel class="explicativo" for="txtDom" value="Domicilio:"/>
+		<h:inputText id="txtDom" label="Domicilio" required="true" value="#{adminCliente.clienteEdit.cliDom}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCol" value="Colonia:"/>
+		<h:inputText id="txtCol" label="Colonia" required="true" value="#{adminCliente.clienteEdit.cliCol}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCP" value="Codigo Postal:"/>
+		<h:inputText id="txtCP" label="Codigo Postal" required="true" value="#{adminCliente.clienteEdit.cliCOP}"/>
+		
+		<h:outputLabel class="explicativo" for="txtCiu" value="Ciudad:"/>
+		<h:inputText id="txtCiu" label="Ciudad" required="true" value="#{adminCliente.clienteEdit.cliCiu}"/>
+		
+		<h:outputLabel class="explicativo" for="txtEdo" value="Estado:"/>
+		<h:inputText id="txtEdo" label="Estado" required="true" value="#{adminCliente.clienteEdit.cliEdo}"/>
+		
+		<h:outputLabel class="explicativo" for="txtPai" value="Pais:"/>
+		<h:inputText id="txtPai" label="Pais" required="true" value="#{adminCliente.clienteEdit.cliPai}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliCo1" value="Nombre de Contacto 1:"/>
+		<h:inputText id="txtcliCo1" label="Nombre 1"  value="#{adminCliente.clienteEdit.cliCo1}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliT11" value="Telefono 1 de Contacto 1:"/>
+		<h:inputText id="txtcliT11" label="Telefono 1"  value="#{adminCliente.clienteEdit.cliT11}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliT21" value="Telefono 2 de Contacto 1:"/>
+		<h:inputText id="txtcliT21" label="Telefono 2" value="#{adminCliente.clienteEdit.cliT21}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliC11" value="Correo 1 de Contacto 1:"/>
+		<h:inputText id="txtcliC11" label="Correo 1"  value="#{adminCliente.clienteEdit.cliC11}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliC21" value="Correo 2 de Contacto 1:"/>
+		<h:inputText id="txtcliC21" label="Correo 2"  value="#{adminCliente.clienteEdit.cliC21}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliCo2" value="Nombre de Contacto 2:"/>
+		<h:inputText id="txtcliCo2" label="Nombre 2"  value="#{adminCliente.clienteEdit.cliCo2}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliT12" value="Telefono 1 de Contacto 2:"/>
+		<h:inputText id="txtcliT12" label="Telefono 1"  value="#{adminCliente.clienteEdit.cliT12}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliT22" value="Telefono 2 de Contacto 2:"/>
+		<h:inputText id="txtcliT22" label="Telefono 2"  value="#{adminCliente.clienteEdit.cliT22}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliC12" value="Correo 1 de Contacto 2:"/>
+		<h:inputText id="txtcliC12" label="Correo 1"  value="#{adminCliente.clienteEdit.cliC12}"/>
+		
+		<h:outputLabel class="explicativo" for="txtcliC21" value="Correo 2 de Contacto 2:"/>
+		<h:inputText id="txtcliC22" label="Correo 2"  value="#{adminCliente.clienteEdit.cliC22}"/>
+		
+<h:outputLabel class="explicativo" for="rutas" value="Seleccione Vehiculos que seran Asignadas:"/>
+		 <h:selectManyMenu id="rutas" value="#{adminCliente.vehiculosSeleccion}" style="height:200px;">
+		 	<f:selectItems value="#{adminCliente.vehiculosDisponibles}" />
+		 </h:selectManyMenu>
+		 
+		 <h:commandButton id="btnGuardar"  value="Guardar" action="#{adminCliente.guardaClienteEditado}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminCliente.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+</h:form>
+<h:form>
+<h:commandButton id="btnRegresar"  value="Regresar" action="#{adminCliente.regresarMuestraClientes}" />
+</h:form>
+    </div>
+    </ui:define>
+                </ui:composition>
+                </html>

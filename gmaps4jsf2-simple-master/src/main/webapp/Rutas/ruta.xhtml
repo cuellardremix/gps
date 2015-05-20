@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="styleRa.css"  />
+        Rastreador GPS
+    </ui:define>
+    
+    <ui:define name="content">
+  
+  <h:panelGrid columns="2">
+
+
+  <h:form id="panelA">
+<!--     <h:panelGrid class="infoA" columns="2"> -->
+<!--       <h:outputLabel value="Ultima Velocidad registrada:"></h:outputLabel> -->
+<!--       <h:outputLabel value="#{ruta.gpsData.speed}"></h:outputLabel> -->
+<!--       <h:outputLabel value="Ultima Mensaje recibido:"></h:outputLabel> -->
+<!--       <h:outputLabel value="#{ruta.gpsData.alarm}"></h:outputLabel> -->
+<!--     </h:panelGrid> -->
+<!--     <h:panelGrid columns="2"> -->
+<!--     <h:selectOneMenu id="comandosA" value="#{ruta.comandoSeleccionado}" style="width:150px"> -->
+<!-- 		<f:selectItems value="#{ruta.comandos}" /> -->
+<!-- 	</h:selectOneMenu> -->
+<!--     <h:commandButton action="#{ruta.activarComando}" value="Ejecutar Comando"></h:commandButton> -->
+<!--     </h:panelGrid> -->
+    
+    <h:panelGrid class="infoA" columns="2">
+    
+    <h:commandButton action="#{ruta.iniciarGrabacionRuta}" value="Iniciar"></h:commandButton>
+    <h:commandButton action="#{ruta.detenerGrabacionRuta}" value="Detener"></h:commandButton>
+    
+<h:selectOneMenu id="rutasA" value="#{ruta.rutaSeleccionada}" disabled="#{ruta.bloqueoVehiculo}" style="width:150px">
+		<f:selectItems value="#{ruta.rutas}"/>
+</h:selectOneMenu>
+<h:commandButton action="#{ruta.pintarCerca}" value="Pintar Cerca"></h:commandButton>
+
+<h:selectOneMenu id="vehiculosA" value="#{ruta.vehiculoSeleccionado}" disabled="#{ruta.bloqueoVehiculo}" style="width:150px">
+		<f:selectItems value="#{ruta.vehiculos}"/>
+</h:selectOneMenu>
+<h:commandButton action="#{ruta.cambiarVehiculo}" value="Cambiar"></h:commandButton>
+<h:outputText value="Nombre de la Nueva Ruta: "></h:outputText>
+<h:inputText value="#{ruta.nuevaRuta}"></h:inputText>
+<h:outputText value="Ancho:"></h:outputText>
+<h:inputText value="#{ruta.anchoNuevo}"></h:inputText>
+<h:commandButton action="#{ruta.agregarNuevaRuta}" value="Crear"></h:commandButton>
+</h:panelGrid>
+<!-- <h:commandButton action="#{ruta.clear}" value="Limpiar"></h:commandButton> -->
+  </h:form>
+
+ 
+        <h:form id="gmap">        
+            <m:map id="mapa" width="500" height="400" enableScrollWheelZoom="true" 
+            binding="#{ruta.map}"
+            renderOnWindowLoad ="false"
+            latitude="#{ruta.gpsData.latitude}"
+            longitude="#{ruta.gpsData.longitude}"
+            partiallyTriggered="true" 
+            autoReshape="true"
+            rendered="true"
+			actionListener="#{ruta.addMarkerHere}" 
+			submitOnClick="true">
+			<m:marker latitude="#{ruta.gpsData.latitude}"
+            longitude="#{ruta.gpsData.longitude}">
+            <m:icon imageURL="../resources/imagenes/inicio.png"></m:icon>
+            </m:marker>
+            </m:map>
+            
+            <p:poll interval="5" listener="#{ruta.refresh}"  
+              widgetVar="poll" autoStart="true" stop="#{ruta.bloqueoVehiculo==false}" async="true"/>
+        </h:form>
+  </h:panelGrid>
+<!--                   <span></span><img src="../resources/imagenes//logo.png" style="position:absolute; bottom:5px;"/> -->
+    </ui:define>
+</ui:composition>
+</html>

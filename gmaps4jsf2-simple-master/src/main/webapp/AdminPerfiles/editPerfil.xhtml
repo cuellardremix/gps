@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+
+	<ui:define name="title">
+	<h:outputStylesheet library="css" name="table-style.css"  />
+        Editar
+    </ui:define>
+    
+    <ui:define name="content">
+    
+    <div>
+<h:form>
+ <p:growl id="growl" />  
+     	<h:outputText class="explicativo" value="ID: #{adminPerfil.perfilEdit.perLla}"></h:outputText>
+    	<h:panelGrid columns="2">
+
+    
+		<h:outputLabel class="explicativo" for="txtFechaAlta" value="Fecha de Alta:"/>
+		<p:calendar id="txtFechaAlta" label="Fecha de Alta" required="true" value="#{adminPerfil.perfilEdit.perFAl}" />
+
+		<h:outputLabel class="explicativo" for="txtFechaBaja" value="Fecha de Baja:"/>
+		<p:calendar id="txtFechaBaja" label="Fecha de Baja"  value="#{adminPerfil.perfilEdit.perFBa}" />
+
+
+		<h:outputLabel class="explicativo" for="txtTipo" value="Tipo:"/>
+		<h:inputText id="txtTipo" label="Tipo" required="true" value="#{adminPerfil.perfilEdit.perTip}"/>
+		
+		<h:outputLabel class="explicativo" for="txtNom" value="Nombre"/>
+		<h:inputText id="txtNom" label="Nombre" required="true" value="#{adminPerfil.perfilEdit.perNom}"/>
+		
+		
+<h:commandButton id="btnGuardar"  value="Guardar" action="#{adminPerfil.guardaPerfilEditado}" update="growl"/>
+<!-- <h:commandButton id="btnRegresar"  value="Regresar" action="#{adminPerfil.regresarMuestraUsuarios}" /> -->
+
+</h:panelGrid>
+</h:form>
+<h:form>
+<h:commandButton id="btnRegresar"  value="Regresar" action="#{adminPerfil.regresarMuestraPerfiles}" />
+</h:form>
+    </div>
+    </ui:define>
+                </ui:composition>
+                </html>

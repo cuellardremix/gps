@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a4j="https://ajax4jsf.dev.java.net/ajax" 
+      xmlns:p="http://primefaces.org/ui" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/base-template.xhtml">
+    <ui:define name="js">
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?sensor=true">
+        </script>
+    </ui:define>
+    <ui:define name="title">
+    <h:outputStylesheet library="css" name="style.css"  />
+        Monitoreo General GPS
+    </ui:define>
+    
+    <ui:define name="content">
+  
+<h:body>
+<h:form>
+<input type="button" name="imprimir" value="Imprimir" onclick="window.print();"/>
+</h:form>
+<h:form id="form">
+    <p:dataTable id="eventos" value="#{monitoreoG.datos}" var="v" filteredValue="#{monitoreoG.datosfiltrados}"
+    emptyMessage="No se encontraron registros."
+    styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			lazy="true">
+    	<p:column sortBy="#{v.idRegistro}" filterMatchMode="contains">
+    		<f:facet name="header">Id</f:facet>
+    		<h:outputText value="#{v.idRegistro}"/>
+    	</p:column>
+    	<p:column style="align:center'">
+    		<f:facet name="header">Estatus</f:facet>
+    		<img src="#{v.alarm}"/>
+    		<h:outputText value="#{v.io1}"/>
+    	</p:column>
+    	<p:column>
+    		<f:facet name="header">Fecha</f:facet>
+    		<h:outputText value="#{v.fecha}"/>
+    	</p:column>
+<!--     	<p:column filterBy="#{v.imei}" filterMatchMode="contains" > -->
+		<p:column>
+    		<f:facet name="header">Vehiculo</f:facet>
+    		<h:outputText value="#{v.imei}"/>
+    	</p:column>
+<!--     	<p:column> -->
+<!--     		<f:facet name="header">Latitud</f:facet> -->
+<!--     		<h:outputText value="#{v.latitude}"/> -->
+<!--     	</p:column> -->
+<!--     	<p:column> -->
+<!--     		<f:facet name="header">Longitud</f:facet> -->
+<!--     		<h:outputText value="#{v.longitude}"/> -->
+<!--     	</p:column> -->
+	<p:column>
+	<f:facet name="header">Direcci&oacute;n</f:facet>
+	<h:outputText value="#{v.io4}"/>
+	</p:column>
+    	<p:column>
+    		<f:facet name="header">Velocidad</f:facet>
+    		<h:outputText value="#{v.speed}"/>
+    	</p:column>
+    </p:dataTable>
+       <p:poll interval="5" listener="#{monitoreoG.refresh}"  
+              widgetVar="poll" update="form" autoStart="true" async="true"/>
+    <p:blockUI block="eventos" trigger="eventos">
+        CARGANDO<br />
+<!--         <p:graphicImage name="../resources/imagenes//load.gif"/> -->
+<img src="../resources/imagenes//load.gif"></img>
+    </p:blockUI>
+</h:form>
+       <h:form>
+       
+       </h:form>     
+         
+
+
+  
+<!--                   <span></span><img src="../resources/imagenes//logo.png"/> -->
+</h:body>
+    </ui:define>
+</ui:composition>
+</html>
